@@ -1,0 +1,4734 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: portfolio
+    label: Portfolios
+    folder: cms/portfolio
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Project Details
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_project-summary
+        label: Project Summary
+        widget: text
+        required: false
+      - hint: Used on project list grid
+        name: f_main-project-image
+        label: Main Project Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_client
+        label: Client
+        widget: string
+        required: false
+      - hint: ''
+        name: f_client-logo
+        label: Client Logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_services-rendered
+        label: Services Rendered
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_client-website
+        label: Client website
+        widget: string
+        required: false
+      - hint: Put 3 images here
+        name: f_additional-images
+        label: Additional images
+        widget: list
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: portfolio
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[portfolio].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: post
+    label: Blog Posts
+    folder: cms/post
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Post Body
+        name: body
+        widget: markdown
+        required: false
+      - hint: A summary of the blog post that appears on blog post grid
+        name: f_post-summary
+        label: Post Summary
+        widget: text
+        required: false
+      - hint: ''
+        name: f_main-image
+        label: Main Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: Smaller version of main image that is used on blog post grid
+        name: f_thumbnail-image
+        label: Thumbnail image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_author-s-name
+        label: Author 1 Name
+        widget: string
+        required: false
+      - hint: ''
+        name: f_lnik-to-author-s-website
+        label: Author 1 website
+        widget: string
+        required: false
+      - hint: ''
+        name: f_author-s-linkedin
+        label: Author 1 LinkedIn
+        widget: string
+        required: false
+      - hint: ''
+        name: f_author-1-instagram
+        label: Author 1 Instagram
+        widget: string
+        required: false
+      - hint: ''
+        name: f_author-1-tiktok
+        label: Author 1 TikTok
+        widget: string
+        required: false
+      - hint: ''
+        name: f_author-1-youtube
+        label: Author 1 YouTube
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: post
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[post].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: deep_dives
+    label: Deep dives
+    folder: cms/deep-dives
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name of the deep dive
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: Here comes the first image in the deepdive carousel
+        name: f_cover-image
+        label: Cover image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: Here come the other pictures from the carousels
+        name: f_rest-of-the-carousel
+        label: Rest of the carousel
+        widget: list
+        required: true
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: true
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: deep-dives
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[deep-dives].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: 20, key: 63e'
+            label: Text
+            name: 63e
+            widget: string
+          - hint: 'Original text: %, key: 25'
+            label: Text
+            name: '25'
+            widget: string
+          - hint: 'Original text: About B, key: 1c03104f'
+            label: Text
+            name: 1c03104f
+            widget: string
+          - hint: "Original text: The Badass Mob\_Newsletter, key: -736277d2"
+            label: Text
+            name: '-736277d2'
+            widget: string
+          - hint: 'Original text: Podcast, key: 4b0c1ae4'
+            label: Text
+            name: 4b0c1ae4
+            widget: string
+          - hint: 'Original text: Blog, key: 1fa3c2'
+            label: Text
+            name: 1fa3c2
+            widget: string
+          - hint: 'Original text: Portfolio, key: -45b0dad8'
+            label: Text
+            name: '-45b0dad8'
+            widget: string
+          - hint: 'Original text: Dare to differentiate, key: 1b637eed'
+            label: Text
+            name: 1b637eed
+            widget: string
+          - hint: 'Original text: Differentiate fearlessly, key: 898abd4'
+            label: Text
+            name: 898abd4
+            widget: string
+          - hint: 'Original text: Dominate with badassery, key: -2df6a5f5'
+            label: Text
+            name: '-2df6a5f5'
+            widget: string
+          - hint: >-
+              Original text: 1:1 branding strategy consulting for service-based
+              businesses: reach the 95% that don’t know you exist!, key:
+              214bed52
+            label: Text
+            name: 214bed52
+            widget: text
+          - hint: 'Original text: Roo needs your help, key: -67cfa123'
+            label: Text
+            name: '-67cfa123'
+            widget: string
+          - hint: 'Original text: Reveal a hint and help roo, key: -5c2c311d'
+            label: Text
+            name: '-5c2c311d'
+            widget: string
+          - hint: >-
+              Original text: Roo is known for using a certain type of bat - can
+              you find the one that is just the right fit for her?, key:
+              -630f18cf
+            label: Text
+            name: '-630f18cf'
+            widget: text
+          - hint: 'Original text: dare to differentiate, key: -517dd0f3'
+            label: Text
+            name: '-517dd0f3'
+            widget: string
+          - hint: 'Original text: Dominate with Badassery, key: 497b79eb'
+            label: Text
+            name: 497b79eb
+            widget: string
+          - hint: 'Original text: Be badass, key: 7f037eb9'
+            label: Text
+            name: 7f037eb9
+            widget: string
+          - hint: "Original text: Be \_badass, key: 32ba5e3f"
+            label: Text
+            name: 32ba5e3f
+            widget: string
+          - hint: 'Original text: this one is too damaged, key: eb7afcf'
+            label: Text
+            name: eb7afcf
+            widget: string
+          - hint: 'Original text: Is , key: 12016'
+            label: Text
+            name: '12016'
+            widget: string
+          - hint: 'Original text: Your brand, key: 7bd9b97a'
+            label: Text
+            name: 7bd9b97a
+            widget: string
+          - hint: 'Original text: RIP, key: 13cf9'
+            label: Text
+            name: 13cf9
+            widget: string
+          - hint: 'Original text: Eluding , key: 1e2bab14'
+            label: Text
+            name: 1e2bab14
+            widget: string
+          - hint: 'Original text: high-ticket clients, key: 312d587f'
+            label: Text
+            name: 312d587f
+            widget: string
+          - hint: 'Original text: Gambling, key: -65b82f7b'
+            label: Text
+            name: '-65b82f7b'
+            widget: string
+          - hint: 'Original text: on marketing and with no sales, key: -68773cbd'
+            label: Text
+            name: '-68773cbd'
+            widget: string
+          - hint: 'Original text: Lacking, key: 5f84fe05'
+            label: Text
+            name: 5f84fe05
+            widget: string
+          - hint: 'Original text: Presence and Attention, key: 506167b0'
+            label: Text
+            name: 506167b0
+            widget: string
+          - hint: 'Original text: Confusing , key: -42716ba0'
+            label: Text
+            name: '-42716ba0'
+            widget: string
+          - hint: 'Original text: about What message to use, key: -261f07bc'
+            label: Text
+            name: '-261f07bc'
+            widget: string
+          - hint: 'Original text: Dominate , key: -53c009eb'
+            label: Text
+            name: '-53c009eb'
+            widget: string
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: 'Original text: Fearlessly., key: -74448348'
+            label: Text
+            name: '-74448348'
+            widget: string
+          - hint: >-
+              Original text: With a badass branding strategy that’ll take you
+              out of your comfort zone (seriously, prepare to get uncomfortable
+              - in the best way possible.), key: 66fe007d
+            label: Text
+            name: 66fe007d
+            widget: text
+          - hint: >-
+              Original text: This is your official invitation to the private
+              mob, where you have access to:, key: -14a5a78d
+            label: Text
+            name: '-14a5a78d'
+            widget: string
+          - hint: 'Original text: Insider brand strategy approach., key: -764e80a4'
+            label: Text
+            name: '-764e80a4'
+            widget: string
+          - hint: 'Original text: BTS and early access to badassery, key: -1ac0857e'
+            label: Text
+            name: '-1ac0857e'
+            widget: string
+          - hint: >-
+              Original text: Fresh, fluff-free perspectives on getting an edge
+              over competitors., key: -12503c5
+            label: Text
+            name: '-12503c5'
+            widget: string
+          - hint: 'Original text: ⚠️, key: 5ab6f'
+            label: Text
+            name: 5ab6f
+            widget: string
+          - hint: 'Original text: Warning, key: -59c1b884'
+            label: Text
+            name: '-59c1b884'
+            widget: string
+          - hint: 'Original text: ⚠️ , key: afc291'
+            label: Text
+            name: afc291
+            widget: string
+          - hint: >-
+              Original text: It’s the newsletter where boring goes to die, and
+              brand domination is the game plan., key: c6fadf8
+            label: Text
+            name: c6fadf8
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: How Can , key: -be41fa0'
+            label: Text
+            name: '-be41fa0'
+            widget: string
+          - hint: 'Original text: Basassery by b Help?, key: -28d45888'
+            label: Text
+            name: '-28d45888'
+            widget: string
+          - hint: 'Original text: Increased inbound leads, key: -7b38c02e'
+            label: Text
+            name: '-7b38c02e'
+            widget: string
+          - hint: >-
+              Original text: Sales and marketing usually focuses on the 5% of
+              those ready to purchase. Effective brand strategy reaches those
+              sitting on the fence, so you’ll have prospects reaching out to
+              you, instead of the other way around!, key: 12f0ebd0
+            label: Text
+            name: 12f0ebd0
+            widget: text
+          - hint: 'Original text: Quicker sales cycle, key: d66a4ec'
+            label: Text
+            name: d66a4ec
+            widget: string
+          - hint: >-
+              Original text: When prospects know what to expect from a brand,
+              hesitation melts away and they approach you first. Build clarity
+              in your unique value proposition to resonate with your target
+              audience and build trust in your brand strategy., key: -4b9123e2
+            label: Text
+            name: '-4b9123e2'
+            widget: text
+          - hint: >-
+              Original text: Increased referrals and word of mouth, key:
+              166d7903
+            label: Text
+            name: 166d7903
+            widget: string
+          - hint: >-
+              Original text: Focus on delivering consistency that turns clients
+              into your hype team. They’ll refer your business to others,
+              amplifying your reach!, key: -4b7b7a30
+            label: Text
+            name: '-4b7b7a30'
+            widget: text
+          - hint: 'Original text: A distinct and memorable identity, key: -51fef006'
+            label: Text
+            name: '-51fef006'
+            widget: string
+          - hint: >-
+              Original text: A strong brand strategy draws out your brand’s
+              unique identity, burning into the memory of anyone who crosses its
+              path and differentiating you from your competitors., key:
+              -6f8d4444
+            label: Text
+            name: '-6f8d4444'
+            widget: text
+          - hint: 'Original text: Cohesive and impactful marketing, key: -25a15c9e'
+            label: Text
+            name: '-25a15c9e'
+            widget: string
+          - hint: >-
+              Original text: Crafting a clear roadmap that’ll help guide your
+              marketing and messaging activities. Resonate deeply with your
+              target audience, and effectively communicate your brand’s
+              essence., key: -2898e328
+            label: Text
+            name: '-2898e328'
+            widget: text
+          - hint: 'Original text: this one is, key: -6fe27f1a'
+            label: Text
+            name: '-6fe27f1a'
+            widget: string
+          - hint: 'Original text: too bright, key: 500fef46'
+            label: Text
+            name: 500fef46
+            widget: string
+          - hint: 'Original text: Deep dives, key: -409fc315'
+            label: Text
+            name: '-409fc315'
+            widget: string
+          - hint: >-
+              Original text: Have a look at the badass brands, that did it
+              right!, key: 5f4d95b2
+            label: Text
+            name: 5f4d95b2
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: What people, key: 792eb34b'
+            label: Text
+            name: 792eb34b
+            widget: string
+          - hint: 'Original text: Say about B, key: -60bda2e6'
+            label: Text
+            name: '-60bda2e6'
+            widget: string
+          - hint: 'Original text: Daniel Gasser, key: -21034778'
+            label: Text
+            name: '-21034778'
+            widget: string
+          - hint: 'Original text: Coach, key: 3e4147a'
+            label: Text
+            name: 3e4147a
+            widget: string
+          - hint: 'Original text: Soren Lynge Bjerrum, key: 3a869b73'
+            label: Text
+            name: 3a869b73
+            widget: string
+          - hint: 'Original text: Founder at SB Digital, key: -4097239d'
+            label: Text
+            name: '-4097239d'
+            widget: string
+          - hint: 'Original text: Peter Tomanka, key: -739aebbf'
+            label: Text
+            name: '-739aebbf'
+            widget: string
+          - hint: 'Original text: Web Designer, key: -56e05d89'
+            label: Text
+            name: '-56e05d89'
+            widget: string
+          - hint: 'Original text: Laiba Javed, key: -61ea2acf'
+            label: Text
+            name: '-61ea2acf'
+            widget: string
+          - hint: 'Original text: LinkedIn Strategist, key: -481deaba'
+            label: Text
+            name: '-481deaba'
+            widget: string
+          - hint: 'Original text: Nicolas BROCARD-SAIDI, key: -2a09b3e7'
+            label: Text
+            name: '-2a09b3e7'
+            widget: string
+          - hint: 'Original text: General Manager at A-TEX Asia, key: -1a85d52f'
+            label: Text
+            name: '-1a85d52f'
+            widget: string
+          - hint: 'Original text: Ralph Jan Slond, key: -7131b1c8'
+            label: Text
+            name: '-7131b1c8'
+            widget: string
+          - hint: "Original text: Burnout Coach |\_Life Coach, key: -6f07c23f"
+            label: Text
+            name: '-6f07c23f'
+            widget: string
+          - hint: >-
+              Original text: "Posts by Beatrice alone prove her authority on the
+              subject of branding on LinkedIn. I already found the advice she
+              shares highly commendable, and then we scheduled a time to
+              virtually meet and discuss how I can align my long-term goals of
+              opening up an agency in the future with my personal brand. The
+              valuable tips she shared have not only helped me avoid the
+              starting out mistakes I was about to make, but also get way more
+              clarity on my future aims. Hire her for your badass branding needs
+              before you start working on anything else!", key: -4afd6d21
+            label: Text
+            name: '-4afd6d21'
+            widget: text
+          - hint: >-
+              Original text: "Working with Beatrice has been a real pleasure.
+              She has taken the time from the very start to understand me as a
+              person in order to understand the business I was building and help
+              on the branding. She came up with plenty of interesting
+              suggestions even before we worked together, helped set the
+              framework, and provided me with great momentum at a critical
+              building stage. I look forward to working together in the future
+              and using B's energy for my brand!", key: -11e97360
+            label: Text
+            name: '-11e97360'
+            widget: text
+          - hint: >-
+              Original text: "Beatrice is truly a Badass! The way she is able to
+              ask questions about your brand that are on the one hand extremely
+              deep and on the other hand super revealing is really a super power
+              of hers!It is through her help that I am able to fully revamp the
+              message that I send out, so that it becomes more and more true to
+              my own essence.I would recommend Beatrice to anyone who wants to
+              revamp their brand, and wants their own Badass to come out!", key:
+              -1b6d2998
+            label: Text
+            name: '-1b6d2998'
+            widget: text
+          - hint: 'Original text: Roo doesn''t like wooden ones, key: -3bc95066'
+            label: Text
+            name: '-3bc95066'
+            widget: string
+          - hint: 'Original text: The Badassery , key: 3a7e19df'
+            label: Text
+            name: 3a7e19df
+            widget: string
+          - hint: 'Original text: Blueprint, key: -136a358d'
+            label: Text
+            name: '-136a358d'
+            widget: string
+          - hint: 'Original text: B, key: 42'
+            label: Text
+            name: '42'
+            widget: string
+          - hint: 'Original text: rand analysis, key: -2ce45f89'
+            label: Text
+            name: '-2ce45f89'
+            widget: string
+          - hint: >-
+              Original text: Here we dive into your brand truth: your story,
+              goals, market stance, and target audience. I’ll also audit your
+              existing positioning, messaging, and visual identity., key:
+              6de917c5
+            label: Text
+            name: 6de917c5
+            widget: text
+          - hint: 'Original text: A, key: 41'
+            label: Text
+            name: '41'
+            widget: string
+          - hint: 'Original text: rticulate internal brand, key: -7700c09b'
+            label: Text
+            name: '-7700c09b'
+            widget: string
+          - hint: >-
+              Original text: Dive into your brand: solidify core values,
+              foundations, strengths, and weaknesses. These will lead every step
+              – from hiring to sales; embodying your brand’s beliefs, actions,
+              and commitments., key: -2debe3e0
+            label: Text
+            name: '-2debe3e0'
+            widget: text
+          - hint: 'Original text: D, key: 44'
+            label: Text
+            name: '44'
+            widget: string
+          - hint: 'Original text: eep dive market landscape, key: -d8477cd'
+            label: Text
+            name: '-d8477cd'
+            widget: string
+          - hint: >-
+              Original text: Overview of the market battlefield: analyzing your
+              competition, evaluating overall market situation, and refining
+              insights about your target audience’s needs, preferences, and
+              behaviors., key: 3d72718d
+            label: Text
+            name: 3d72718d
+            widget: text
+          - hint: 'Original text: ssess positioning & differentiation, key: -6edfe457'
+            label: Text
+            name: '-6edfe457'
+            widget: string
+          - hint: >-
+              Original text: Seize the spotlight: here we prove why you’re THE
+              choice—differentiating your brand from the competition and
+              positioning it to own the marketplace. I’ll define your brand
+              personality to draw in and captivate your audience., key: 2daa501b
+            label: Text
+            name: 2daa501b
+            widget: text
+          - hint: 'Original text: S, key: 53'
+            label: Text
+            name: '53'
+            widget: string
+          - hint: 'Original text: tructure voice, key: 7a714512'
+            label: Text
+            name: 7a714512
+            widget: string
+          - hint: >-
+              Original text: It’s starting to take shape: We identify the
+              characteristics of your voice and tone and create guidelines.
+              Together, we’ll mold audience perception through defining
+              messaging like taglines., key: 6e914dcb
+            label: Text
+            name: 6e914dcb
+            widget: text
+          - hint: 'Original text: hape brand story, key: 10592eaa'
+            label: Text
+            name: 10592eaa
+            widget: string
+          - hint: >-
+              Original text: Everyone loves a story: They add an extra
+              connection with your audience, so we’ll dive into your brand story
+              and client journey., key: 45740a1d
+            label: Text
+            name: 45740a1d
+            widget: text
+          - hint: 'Original text: E, key: 45'
+            label: Text
+            name: '45'
+            widget: string
+          - hint: 'Original text: stablish visual elements, key: -4fd16475'
+            label: Text
+            name: '-4fd16475'
+            widget: string
+          - hint: >-
+              Original text: Your brand identity and swagger: Arming your design
+              team, present and future, with strategic design direction. There’s
+              logo design management if needed, graphic use guidelines, color
+              palettes, color schemes, and typography., key: 650fd6ef
+            label: Text
+            name: 650fd6ef
+            widget: text
+          - hint: 'Original text: R, key: 52'
+            label: Text
+            name: '52'
+            widget: string
+          - hint: 'Original text: ollout implementation strategies, key: -1a3d1a2'
+            label: Text
+            name: '-1a3d1a2'
+            widget: string
+          - hint: >-
+              Original text: Strategies for brand awareness: Together we put
+              everything into action so you get results and it’s applied
+              throughout the business consistently., key: 1755fdfb
+            label: Text
+            name: 1755fdfb
+            widget: text
+          - hint: 'Original text: Y, key: 59'
+            label: Text
+            name: '59'
+            widget: string
+          - hint: 'Original text: early audit material, key: -4fd211d7'
+            label: Text
+            name: '-4fd211d7'
+            widget: string
+          - hint: >-
+              Original text: A badass brand audit guide: You get a guide based
+              on everything we’ve done to this point so you can ensure your
+              brand is consistent and easy to tweak or pivot as it grows, key:
+              -154a7b0c
+            label: Text
+            name: '-154a7b0c'
+            widget: text
+          - hint: 'Original text: Who is , key: -4e1d874c'
+            label: Text
+            name: '-4e1d874c'
+            widget: string
+          - hint: 'Original text: Beatrice?, key: d21a070'
+            label: Text
+            name: d21a070
+            widget: string
+          - hint: 'Original text: Hi! I’m Beatrice. , key: 3c14f724'
+            label: Text
+            name: 3c14f724
+            widget: string
+          - hint: >-
+              Original text: I’m the founder and brand strategist behind
+              Badassery by B and the host of ‘The Art of Branding’ Podcast. I
+              practice what I preach and I put my money where my mouth is., key:
+              -cab627
+            label: Text
+            name: '-cab627'
+            widget: text
+          - hint: >-
+              Original text: That way you know that results are achievable.,
+              key: 63b3f4bb
+            label: Text
+            name: 63b3f4bb
+            widget: string
+          - hint: 'Original text: Get to know me better, key: -645ea402'
+            label: Text
+            name: '-645ea402'
+            widget: string
+          - hint: 'Original text: Meet, key: 248867'
+            label: Text
+            name: '248867'
+            widget: string
+          - hint: 'Original text: ROO, key: 13db2'
+            label: Text
+            name: 13db2
+            widget: string
+          - hint: >-
+              Original text: Let’s address the marsupial in the room: What’s the
+              deal with the kangaroo, Beatrice?, key: 195c07f
+            label: Text
+            name: 195c07f
+            widget: string
+          - hint: >-
+              Original text: Though I live and work in Thailand, I’m originally
+              from Australia, so a ‘roo seemed the natural choice to be my brand
+              mascot., key: -52bfe106
+            label: Text
+            name: '-52bfe106'
+            widget: text
+          - hint: >-
+              Original text: Plus, y’know, a shade-wearing kangaroo with a
+              baseball bat? How badass is that?!, key: 7d756f73
+            label: Text
+            name: 7d756f73
+            widget: string
+          - hint: 'Original text: Beatrice., key: d21a05f'
+            label: Text
+            name: d21a05f
+            widget: string
+          - hint: 'Original text: Stop Wasting, key: 6276ef39'
+            label: Text
+            name: 6276ef39
+            widget: string
+          - hint: 'Original text: money , key: -3fb008a0'
+            label: Text
+            name: '-3fb008a0'
+            widget: string
+          - hint: 'Original text: and stand , key: 40c63573'
+            label: Text
+            name: 40c63573
+            widget: string
+          - hint: 'Original text: out, key: 1af4e'
+            label: Text
+            name: 1af4e
+            widget: string
+          - hint: 'Original text: In my experience, businesses end up:, key: 6517f03f'
+            label: Text
+            name: 6517f03f
+            widget: string
+          - hint: >-
+              Original text: Unable to consistently secure high-ticket clients,
+              key: 43f4797f
+            label: Text
+            name: 43f4797f
+            widget: string
+          - hint: >-
+              Original text: Throwing down $10K on a website and not generating
+              leads, key: -50b4675a
+            label: Text
+            name: '-50b4675a'
+            widget: string
+          - hint: 'Original text: Having inadequate market presence, key: 33ace9ab'
+            label: Text
+            name: 33ace9ab
+            widget: string
+          - hint: 'Original text: Because , key: 55608afa'
+            label: Text
+            name: 55608afa
+            widget: string
+          - hint: 'Original text: of: , key: 33fb3d'
+            label: Text
+            name: 33fb3d
+            widget: string
+          - hint: 'Original text: Inconsistency, key: -5138384d'
+            label: Text
+            name: '-5138384d'
+            widget: string
+          - hint: 'Original text: Missing real differentiation, key: 482eedbd'
+            label: Text
+            name: 482eedbd
+            widget: string
+          - hint: 'Original text: Meaningless fluff content, key: 2aaaad1e'
+            label: Text
+            name: 2aaaad1e
+            widget: string
+          - hint: >-
+              Original text: Here are two ways I can make those go away:, key:
+              c737bc6
+            label: Text
+            name: c737bc6
+            widget: string
+          - hint: 'Original text: 350 USD, key: -18fd1bac'
+            label: Text
+            name: '-18fd1bac'
+            widget: string
+          - hint: 'Original text: Explosive, key: -74a9ac3b'
+            label: Text
+            name: '-74a9ac3b'
+            widget: string
+          - hint: 'Original text: hour, key: 30f5e4'
+            label: Text
+            name: 30f5e4
+            widget: string
+          - hint: 'Original text: 1 x 1-on-1, 60 minute call, key: -33ecfd72'
+            label: Text
+            name: '-33ecfd72'
+            widget: string
+          - hint: >-
+              Original text: Insights and tips for growth based on your brand,
+              not some template., key: -718d4f71
+            label: Text
+            name: '-718d4f71'
+            widget: string
+          - hint: >-
+              Original text: Analysis of socials and website for maximum use of
+              time., key: 283c5fb5
+            label: Text
+            name: 283c5fb5
+            widget: string
+          - hint: >-
+              Original text: Clear direction on where to move forward from the
+              call., key: 51044116
+            label: Text
+            name: '51044116'
+            widget: string
+          - hint: >-
+              Original text: Let's give your brand a right hook! 🥊, key:
+              -7665ff
+            label: Text
+            name: '-7665ff'
+            widget: string
+          - hint: 'Original text: Get actionable, key: 45b0cbba'
+            label: Text
+            name: 45b0cbba
+            widget: string
+          - hint: 'Original text: advice now, key: -42a88852'
+            label: Text
+            name: '-42a88852'
+            widget: string
+          - hint: 'Original text: Discovery call, key: 7a11beee'
+            label: Text
+            name: 7a11beee
+            widget: string
+          - hint: 'Original text: Brand strategy consulting, key: -ece6ef6'
+            label: Text
+            name: '-ece6ef6'
+            widget: string
+          - hint: 'Original text: 2 x 1-on-1, 90 minute call/month, key: -1483f545'
+            label: Text
+            name: '-1483f545'
+            widget: string
+          - hint: 'Original text: Whatsapp support, key: -2c2e89f'
+            label: Text
+            name: '-2c2e89f'
+            widget: string
+          - hint: >-
+              Original text: Done with you so it resonates and you can pick it
+              up and go, key: -3b749048
+            label: Text
+            name: '-3b749048'
+            widget: string
+          - hint: >-
+              Original text: I guide you through the B.A.D.A.S.S.E.R.Y.
+              Blueprint to dominate in your space, key: -3e51723
+            label: Text
+            name: '-3e51723'
+            widget: string
+          - hint: >-
+              Original text: Let’s talk about what it would look like to work
+              together., key: -403f0ede
+            label: Text
+            name: '-403f0ede'
+            widget: string
+          - hint: 'Original text: Book a free 15-minute, key: 41c4faff'
+            label: Text
+            name: 41c4faff
+            widget: string
+          - hint: 'Original text: discovery call, key: -4a350d32'
+            label: Text
+            name: '-4a350d32'
+            widget: string
+          - hint: 'Original text: you are getting close, key: -38655071'
+            label: Text
+            name: '-38655071'
+            widget: string
+          - hint: 'Original text: Do you have, key: -2bfdff62'
+            label: Text
+            name: '-2bfdff62'
+            widget: string
+          - hint: 'Original text: questions? , key: 397a29ce'
+            label: Text
+            name: 397a29ce
+            widget: string
+          - hint: 'Original text: I have, key: 7e8576df'
+            label: Text
+            name: 7e8576df
+            widget: string
+          - hint: 'Original text: Answers, key: 30b65055'
+            label: Text
+            name: 30b65055
+            widget: string
+          - hint: 'Original text: What is branding strategy?, key: 235522c1'
+            label: Text
+            name: 235522c1
+            widget: string
+          - hint: >-
+              Original text: Branding strategy influences your brand's
+              perception when your audience isn't in the room—the difference
+              between a revered legend and a forgotten relic., key: -7568f2c8
+            label: Text
+            name: '-7568f2c8'
+            widget: text
+          - hint: >-
+              Original text: It's what can make your brand stand out in a crowd
+              and creates guiding principles to stand by for the rest of the
+              business activities., key: 476d37a3
+            label: Text
+            name: 476d37a3
+            widget: text
+          - hint: >-
+              Original text: What are the critical elements of a strong brand
+              strategy for businesses?, key: -4d69647a
+            label: Text
+            name: '-4d69647a'
+            widget: string
+          - hint: 'Original text: A strong brand strategy includes:, key: -13f310db'
+            label: Text
+            name: '-13f310db'
+            widget: string
+          - hint: >-
+              Original text: - Brand internal identity development, key:
+              7eca58f0
+            label: Text
+            name: 7eca58f0
+            widget: string
+          - hint: 'Original text: - Unique value proposition, key: -cbdd735'
+            label: Text
+            name: '-cbdd735'
+            widget: string
+          - hint: 'Original text: - Target audience identification, key: 7f2190ee'
+            label: Text
+            name: 7f2190ee
+            widget: string
+          - hint: 'Original text: - Competitive analysis, key: -1ba75c80'
+            label: Text
+            name: '-1ba75c80'
+            widget: string
+          - hint: 'Original text: - Touchpoint evaluation, key: 47910538'
+            label: Text
+            name: '47910538'
+            widget: string
+          - hint: 'Original text: - Differentiation, key: 55110f92'
+            label: Text
+            name: 55110f92
+            widget: string
+          - hint: 'Original text: - Positioning, key: 3e757a86'
+            label: Text
+            name: 3e757a86
+            widget: string
+          - hint: 'Original text: - Voice and tone, key: -68ea4644'
+            label: Text
+            name: '-68ea4644'
+            widget: string
+          - hint: 'Original text: - Messaging, key: -2901194f'
+            label: Text
+            name: '-2901194f'
+            widget: string
+          - hint: 'Original text: - Storytelling, key: 3127792f'
+            label: Text
+            name: 3127792f
+            widget: string
+          - hint: 'Original text: - Visual identity, key: -29149475'
+            label: Text
+            name: '-29149475'
+            widget: string
+          - hint: 'Original text: - Brand guidelines and standards, key: -7a2e0ca4'
+            label: Text
+            name: '-7a2e0ca4'
+            widget: string
+          - hint: 'Original text: - Brand experience evaluation, key: 3d120e46'
+            label: Text
+            name: 3d120e46
+            widget: string
+          - hint: >-
+              Original text: What common mistakes do businesses make with their
+              branding strategy?, key: -4ff85fc
+            label: Text
+            name: '-4ff85fc'
+            widget: string
+          - hint: 'Original text: Common pitfalls include:, key: 63883ee0'
+            label: Text
+            name: 63883ee0
+            widget: string
+          - hint: >-
+              Original text: - Overcomplicating the brand identity., key:
+              -1c3bd6d9
+            label: Text
+            name: '-1c3bd6d9'
+            widget: string
+          - hint: >-
+              Original text: - Inconsistent or outdated visual elements., key:
+              46e9f828
+            label: Text
+            name: 46e9f828
+            widget: string
+          - hint: >-
+              Original text: - Trying to copy what competitors are doing., key:
+              -331195b4
+            label: Text
+            name: '-331195b4'
+            widget: string
+          - hint: >-
+              Original text: - Lack of personality integrated into the
+              branding., key: 4af23de6
+            label: Text
+            name: 4af23de6
+            widget: string
+          - hint: >-
+              Original text: - Failing to align branding strategy with business
+              objectives., key: 621775
+            label: Text
+            name: '621775'
+            widget: string
+          - hint: >-
+              Original text: - Neglecting to monitor and adapt to evolving
+              market trends., key: -519e6a7e
+            label: Text
+            name: '-519e6a7e'
+            widget: string
+          - hint: >-
+              Original text: - Failing to assess and refine the brand strategy
+              over time., key: -4d3a702a
+            label: Text
+            name: '-4d3a702a'
+            widget: string
+          - hint: >-
+              Original text: - Prioritizing logo, website, and visuals over
+              foundations., key: -2d79461b
+            label: Text
+            name: '-2d79461b'
+            widget: string
+          - hint: >-
+              Original text: - Ignoring or misunderstanding the target
+              audience., key: 378f5fde
+            label: Text
+            name: 378f5fde
+            widget: string
+          - hint: >-
+              Original text: - Unclear, generic, or conflicting brand
+              messaging., key: f4c63da
+            label: Text
+            name: f4c63da
+            widget: string
+          - hint: 'Original text: - The list goes on., key: -2aa772db'
+            label: Text
+            name: '-2aa772db'
+            widget: string
+          - hint: >-
+              Original text: What's the difference between a rebrand and a
+              branding refresh? And how do I know which is right for me?, key:
+              5c313201
+            label: Text
+            name: 5c313201
+            widget: text
+          - hint: 'Original text: Rebrand:, key: -2d5b1a5a'
+            label: Text
+            name: '-2d5b1a5a'
+            widget: string
+          - hint: >-
+              Original text: - A complete reinvention and overhaul of your
+              brand's identity, strategy, and positioning., key: 2d976a61
+            label: Text
+            name: 2d976a61
+            widget: string
+          - hint: 'Original text: Brand Refresh:, key: 24d39578'
+            label: Text
+            name: 24d39578
+            widget: string
+          - hint: >-
+              Original text: - A strategic update and revitalization of your
+              existing brand while preserving its essence.I, key: -4043a1b2
+            label: Text
+            name: '-4043a1b2'
+            widget: text
+          - hint: >-
+              Original text: 'll ask you targeted questions to assess your
+              current branding strategy, gauge your satisfaction, and understand
+              your objectives and vision, helping us determine whether a rebrand
+              or brand refresh is the right path for you., key: -2fb8ba71
+            label: Text
+            name: '-2fb8ba71'
+            widget: text
+          - hint: >-
+              Original text: How do I find the right brand strategist for my
+              business, and what should I look for in their expertise and
+              experience?, key: 48cbc597
+            label: Text
+            name: 48cbc597
+            widget: text
+          - hint: >-
+              Original text: Finding the perfect brand strategist is like
+              hunting for a unicorn with a trusty bow and arrow. Look for
+              someone with a track record of slaying brand dragons, a sixth
+              sense for storytelling, and a personality that vibes with yours
+              like a duet from the rock 'n' roll gods., key: 47684a1c
+            label: Text
+            name: 47684a1c
+            widget: text
+          - hint: >-
+              Original text: Why should I bother with a brand strategist? I have
+              a graphic designer and a coach., key: 2ff9d4a
+            label: Text
+            name: 2ff9d4a
+            widget: string
+          - hint: >-
+              Original text: A brand strategist is the master conductor
+              orchestrating the symphony of your business. While a graphic
+              designer adds visual flair and a coach offers guidance, a brand
+              strategist changes how your entire brand is perceived, focusing
+              on:, key: 7381691f
+            label: Text
+            name: 7381691f
+            widget: text
+          - hint: >-
+              Original text: - Done with you to capture unique vision and
+              identity., key: 41b3a62f
+            label: Text
+            name: 41b3a62f
+            widget: string
+          - hint: >-
+              Original text: - A guiding strategy for all your business
+              activities., key: -6bc506dc
+            label: Text
+            name: '-6bc506dc'
+            widget: string
+          - hint: >-
+              Original text: - Uncovering what sets the brand apart., key:
+              -7dbdb222
+            label: Text
+            name: '-7dbdb222'
+            widget: string
+          - hint: 'Original text: - Getting leads over vanity metrics., key: 7940398c'
+            label: Text
+            name: 7940398c
+            widget: string
+          - hint: 'Original text: - Understanding your audience., key: -4358f554'
+            label: Text
+            name: '-4358f554'
+            widget: string
+          - hint: 'Original text: - A collective purpose., key: -d0046d0'
+            label: Text
+            name: '-d0046d0'
+            widget: string
+          - hint: >-
+              Original text: Sure, you could Google brand strategy and follow
+              those guides, but are they really going to solve what you're
+              struggling to pinpoint yourself?, key: 2674438d
+            label: Text
+            name: 2674438d
+            widget: text
+          - hint: >-
+              Original text: Can a brand strategist help me align my brand
+              messaging and visual elements across different platforms and
+              channels?, key: 325d78c1
+            label: Text
+            name: 325d78c1
+            widget: text
+          - hint: >-
+              Original text: Hecks yeah! A brand strategist will whip your
+              scattered messaging and visuals into a synchronized symphony,
+              ensuring your brand's voice is loud and clear, whether on a
+              billboard, social media, or even a carrier pigeon., key: 6b3738c
+            label: Text
+            name: 6b3738c
+            widget: text
+          - hint: >-
+              Original text: How can you help me define and refine my brand
+              identity?, key: -6890fe5d
+            label: Text
+            name: '-6890fe5d'
+            widget: string
+          - hint: >-
+              Original text: Like the Michelangelo of the business world, I'll
+              chisel away fluffy excess, revealing the essence of your brand's
+              soul refining your values, personality, voice, and visual
+              elements, leaving you with a masterpiece (brand identity) that
+              resonates with your target audience., key: 5542ed31
+            label: Text
+            name: 5542ed31
+            widget: text
+          - hint: 'Original text: What is branding strategy not?, key: 5912b16e'
+            label: Text
+            name: 5912b16e
+            widget: string
+          - hint: 'Original text: - A catchy slogan, key: 3fefcf8e'
+            label: Text
+            name: 3fefcf8e
+            widget: string
+          - hint: 'Original text: - A pretty graphic, key: 7eea7e90'
+            label: Text
+            name: 7eea7e90
+            widget: string
+          - hint: 'Original text: - Your website design, key: 950fbdd'
+            label: Text
+            name: 950fbdd
+            widget: string
+          - hint: 'Original text: - Guided by marketing, key: 60e65942'
+            label: Text
+            name: '60e65942'
+            widget: string
+          - hint: 'Original text: - Something that''s "done for you.", key: 66c94c8c'
+            label: Text
+            name: 66c94c8c
+            widget: string
+          - hint: >-
+              Original text: What is the difference in the approach for each,
+              and how can you guide me through the process?, key: 33e7320
+            label: Text
+            name: '33e7320'
+            widget: text
+          - hint: >-
+              Original text: - A comprehensive reassessment and realignment of
+              your brand's strategy, purpose, and positioning., key: 3a2e092
+            label: Text
+            name: 3a2e092
+            widget: text
+          - hint: >-
+              Original text: - Deep dive into target audience analysis, market
+              research, and competitive landscape evaluation., key: 7676a932
+            label: Text
+            name: 7676a932
+            widget: text
+          - hint: >-
+              Original text: - It aims to redefine your brand's value
+              proposition, messaging, and overall brand experience., key:
+              31f431f5
+            label: Text
+            name: 31f431f5
+            widget: text
+          - hint: 'Original text: You found it!, key: -1c520829'
+            label: Text
+            name: '-1c520829'
+            widget: string
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About B., key: 645ef9bf'
+            label: Text
+            name: 645ef9bf
+            widget: string
+          - hint: 'Original text: Pop-culture branding guide, key: -2be25e9b'
+            label: Text
+            name: '-2be25e9b'
+            widget: string
+          - hint: >-
+              Original text: Learn more about brand strategy. Check out my
+              socials., key: -7f1742ce
+            label: Text
+            name: '-7f1742ce'
+            widget: string
+          - hint: 'Original text: Privacy Policy, key: -3fbde6f6'
+            label: Text
+            name: '-3fbde6f6'
+            widget: string
+          - hint: >-
+              Original text: © 2023 Beatrice Gutknecht. All rights reserved.,
+              key: -2316dcc6
+            label: Text
+            name: '-2316dcc6'
+            widget: string
+          - hint: 'Original text: Website designed and developed by , key: -11fb7a02'
+            label: Text
+            name: '-11fb7a02'
+            widget: string
+          - hint: 'Original text: pee-tee.com, key: -f117b16'
+            label: Text
+            name: '-f117b16'
+            widget: string
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: Oops.. page wasn''t found, key: -176f6778'
+            label: Text
+            name: '-176f6778'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved, key: 556d64d8
+            label: Text
+            name: 556d64d8
+            widget: string
+          - hint: 'Original text: Go back to badassery, key: 579401ac'
+            label: Text
+            name: 579401ac
+            widget: string
+          - hint: 'Original text: Relume Library Style Guide, key: 7947231c'
+            label: Text
+            name: 7947231c
+            widget: string
+          - hint: 'Original text: Version 1.3 • Client-First V2, key: 6e18f87e'
+            label: Text
+            name: 6e18f87e
+            widget: string
+          - hint: 'Original text: Client-First Docs, key: -33d446f3'
+            label: Text
+            name: '-33d446f3'
+            widget: string
+          - hint: 'Original text: Getting Started, key: 3766ef65'
+            label: Text
+            name: 3766ef65
+            widget: string
+          - hint: 'Original text: Typography, key: 5500514f'
+            label: Text
+            name: 5500514f
+            widget: string
+          - hint: "Original text: HTML\_Headings Tags, key: -17b5b80d"
+            label: Text
+            name: '-17b5b80d'
+            widget: string
+          - hint: >-
+              Original text: HTML tags define default Heading styles., key:
+              43cf7afc
+            label: Text
+            name: 43cf7afc
+            widget: string
+          - hint: 'Original text: All H1 Headings, key: -63ec17f7'
+            label: Text
+            name: '-63ec17f7'
+            widget: string
+          - hint: 'Original text: Heading 1, key: 6af22973'
+            label: Text
+            name: 6af22973
+            widget: string
+          - hint: 'Original text: All H2 Headings, key: -6fa2a6d8'
+            label: Text
+            name: '-6fa2a6d8'
+            widget: string
+          - hint: 'Original text: Heading 2, key: 6af22974'
+            label: Text
+            name: 6af22974
+            widget: string
+          - hint: 'Original text: All H3 Headings, key: -7b5935b9'
+            label: Text
+            name: '-7b5935b9'
+            widget: string
+          - hint: 'Original text: Heading 3, key: 6af22975'
+            label: Text
+            name: 6af22975
+            widget: string
+          - hint: 'Original text: All H4 Headings, key: 78f03b66'
+            label: Text
+            name: 78f03b66
+            widget: string
+          - hint: 'Original text: Heading 4, key: 6af22976'
+            label: Text
+            name: 6af22976
+            widget: string
+          - hint: 'Original text: sdf, key: 1bc35'
+            label: Text
+            name: 1bc35
+            widget: string
+          - hint: 'Original text: All H5 Headings, key: 6d39ac85'
+            label: Text
+            name: 6d39ac85
+            widget: string
+          - hint: 'Original text: Heading 5, key: 6af22977'
+            label: Text
+            name: 6af22977
+            widget: string
+          - hint: 'Original text: All H6 Headings, key: 61831da4'
+            label: Text
+            name: 61831da4
+            widget: string
+          - hint: 'Original text: Heading 6, key: 6af22978'
+            label: Text
+            name: 6af22978
+            widget: string
+          - hint: 'Original text: Heading Classes, key: 6647fc8'
+            label: Text
+            name: 6647fc8
+            widget: string
+          - hint: >-
+              Original text: Heading classes when typography style doesn't match
+              the default HTML tag., key: 1c6fd230
+            label: Text
+            name: 1c6fd230
+            widget: string
+          - hint: 'Original text: heading-style-h1, key: -362a6a30'
+            label: Text
+            name: '-362a6a30'
+            widget: string
+          - hint: 'Original text: Heading-style-h1, key: -68662610'
+            label: Text
+            name: '-68662610'
+            widget: string
+          - hint: 'Original text: heading-style-h2, key: -362a6a2f'
+            label: Text
+            name: '-362a6a2f'
+            widget: string
+          - hint: 'Original text: Heading-style-h2, key: -6866260f'
+            label: Text
+            name: '-6866260f'
+            widget: string
+          - hint: 'Original text: heading-style-h3, key: -362a6a2e'
+            label: Text
+            name: '-362a6a2e'
+            widget: string
+          - hint: 'Original text: Heading-style-h3, key: -6866260e'
+            label: Text
+            name: '-6866260e'
+            widget: string
+          - hint: 'Original text: heading-style-h4, key: -362a6a2d'
+            label: Text
+            name: '-362a6a2d'
+            widget: string
+          - hint: 'Original text: Heading-style-h4, key: -6866260d'
+            label: Text
+            name: '-6866260d'
+            widget: string
+          - hint: 'Original text: heading-style-h5, key: -362a6a2c'
+            label: Text
+            name: '-362a6a2c'
+            widget: string
+          - hint: 'Original text: Heading-style-h5, key: -6866260c'
+            label: Text
+            name: '-6866260c'
+            widget: string
+          - hint: 'Original text: heading-style-h6, key: -362a6a2b'
+            label: Text
+            name: '-362a6a2b'
+            widget: string
+          - hint: 'Original text: Heading-style-h6, key: -6866260b'
+            label: Text
+            name: '-6866260b'
+            widget: string
+          - hint: 'Original text: Other HTML Tags, key: e88725e'
+            label: Text
+            name: e88725e
+            widget: string
+          - hint: >-
+              Original text: HTML tags define default text styles., key:
+              -22da9155
+            label: Text
+            name: '-22da9155'
+            widget: string
+          - hint: 'Original text: All Paragraphs, key: 5cba4ce4'
+            label: Text
+            name: 5cba4ce4
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere., key: -5286fc08
+            label: Text
+            name: '-5286fc08'
+            widget: text
+          - hint: 'Original text: All Links, key: 47b903a'
+            label: Text
+            name: 47b903a
+            widget: string
+          - hint: 'Original text: All Block Quotes, key: -101a4b17'
+            label: Text
+            name: '-101a4b17'
+            widget: string
+          - hint: 'Original text: Block Quote, key: 3f3470e9'
+            label: Text
+            name: 3f3470e9
+            widget: string
+          - hint: 'Original text: All Unordered Lists, key: -73afc0b6'
+            label: Text
+            name: '-73afc0b6'
+            widget: string
+          - hint: 'Original text: No bullet list, key: -21b006c3'
+            label: Text
+            name: '-21b006c3'
+            widget: string
+          - hint: 'Original text: All Ordered Lists, key: 4209e983'
+            label: Text
+            name: '4209e983'
+            widget: string
+          - hint: 'Original text: Text Sizes, key: -73a8f021'
+            label: Text
+            name: '-73a8f021'
+            widget: string
+          - hint: >-
+              Original text: Text sizes classes when typography size doesn't
+              match the default HTML tag., key: -2f016817
+            label: Text
+            name: '-2f016817'
+            widget: string
+          - hint: 'Original text: text-size-large, key: -75d7fcf1'
+            label: Text
+            name: '-75d7fcf1'
+            widget: string
+          - hint: 'Original text: text-size-medium, key: -4340bddf'
+            label: Text
+            name: '-4340bddf'
+            widget: string
+          - hint: 'Original text: text-size-regular, key: -1c283d90'
+            label: Text
+            name: '-1c283d90'
+            widget: string
+          - hint: 'Original text: text-size-small, key: -75702325'
+            label: Text
+            name: '-75702325'
+            widget: string
+          - hint: 'Original text: text-size-tiny, key: -6f243f54'
+            label: Text
+            name: '-6f243f54'
+            widget: string
+          - hint: 'Original text: Text Weights, key: -6156a2f8'
+            label: Text
+            name: '-6156a2f8'
+            widget: string
+          - hint: >-
+              Original text: Text weight classes when typography weight doesn't
+              match the default HTML tag., key: -3706cc
+            label: Text
+            name: '-3706cc'
+            widget: string
+          - hint: 'Original text: text-weight-xbold, key: -6542b3f8'
+            label: Text
+            name: '-6542b3f8'
+            widget: string
+          - hint: 'Original text: text-weight-xbold (800), key: 12af1501'
+            label: Text
+            name: 12af1501
+            widget: string
+          - hint: 'Original text: text-weight-bold, key: 704ee01a'
+            label: Text
+            name: 704ee01a
+            widget: string
+          - hint: 'Original text: text-weight-bold (700), key: -760ea0cc'
+            label: Text
+            name: '-760ea0cc'
+            widget: string
+          - hint: 'Original text: text-weight-semibold, key: -399389f8'
+            label: Text
+            name: '-399389f8'
+            widget: string
+          - hint: 'Original text: text-weight-semibold (600), key: 44d5d643'
+            label: Text
+            name: 44d5d643
+            widget: string
+          - hint: 'Original text: text-weight-medium, key: -55b3dc36'
+            label: Text
+            name: '-55b3dc36'
+            widget: string
+          - hint: 'Original text: text-weight-medium (500), key: 31f83626'
+            label: Text
+            name: 31f83626
+            widget: string
+          - hint: 'Original text: text-weight-normal, key: -536baec4'
+            label: Text
+            name: '-536baec4'
+            widget: string
+          - hint: 'Original text: text-weight-normal (400), key: 653091b9'
+            label: Text
+            name: 653091b9
+            widget: string
+          - hint: 'Original text: text-weight-light, key: -65e8bddf'
+            label: Text
+            name: '-65e8bddf'
+            widget: string
+          - hint: 'Original text: text-weight-light (300), key: -2d4df181'
+            label: Text
+            name: '-2d4df181'
+            widget: string
+          - hint: 'Original text: Text Styles, key: -da6ccb'
+            label: Text
+            name: '-da6ccb'
+            widget: string
+          - hint: >-
+              Original text: Text style classes when typography style doesn't
+              match the default HTML tag., key: 5871fa6c
+            label: Text
+            name: 5871fa6c
+            widget: string
+          - hint: 'Original text: text-style-italic, key: -1e09a194'
+            label: Text
+            name: '-1e09a194'
+            widget: string
+          - hint: 'Original text: text-style-strikethrough, key: -613aa0e9'
+            label: Text
+            name: '-613aa0e9'
+            widget: string
+          - hint: 'Original text: text-style-allcaps, key: -576c60ba'
+            label: Text
+            name: '-576c60ba'
+            widget: string
+          - hint: 'Original text: text-style-nowrap, key: -15bdc639'
+            label: Text
+            name: '-15bdc639'
+            widget: string
+          - hint: 'Original text: text-style-quote, key: -5b5d5d40'
+            label: Text
+            name: '-5b5d5d40'
+            widget: string
+          - hint: 'Original text: text-style-link, key: 4f9fb336'
+            label: Text
+            name: 4f9fb336
+            widget: string
+          - hint: 'Original text: text-style-2lines, key: -7c513db7'
+            label: Text
+            name: '-7c513db7'
+            widget: string
+          - hint: 'Original text: text-style-3lines, key: -7a9c6518'
+            label: Text
+            name: '-7a9c6518'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere. Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Suspendisse varius enim in eros elementum
+              tristique. Duis cursus, mi quis viverra ornare, eros dolor
+              interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
+              nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
+              risus tristique posuere., key: 61956fd0
+            label: Text
+            name: 61956fd0
+            widget: text
+          - hint: 'Original text: text-style-muted, key: -5b95aa51'
+            label: Text
+            name: '-5b95aa51'
+            widget: string
+          - hint: 'Original text: text-style-script, key: -de10af9'
+            label: Text
+            name: '-de10af9'
+            widget: string
+          - hint: 'Original text: Text Alignment, key: -4ca1dd50'
+            label: Text
+            name: '-4ca1dd50'
+            widget: string
+          - hint: >-
+              Original text: Text alignment classes when typography alignment
+              doesn't match the default HTML tag., key: -56d5aeb0
+            label: Text
+            name: '-56d5aeb0'
+            widget: string
+          - hint: 'Original text: text-align-left, key: 91bde6f'
+            label: Text
+            name: 91bde6f
+            widget: string
+          - hint: 'Original text: text-align-center, key: 224610bd'
+            label: Text
+            name: 224610bd
+            widget: string
+          - hint: 'Original text: text-align-right, key: 1ab650b4'
+            label: Text
+            name: 1ab650b4
+            widget: string
+          - hint: 'Original text: Rich Text, key: 41b289f1'
+            label: Text
+            name: 41b289f1
+            widget: string
+          - hint: 'Original text: text-rich-text, key: 41067ade'
+            label: Text
+            name: 41067ade
+            widget: string
+          - hint: 'Original text: This is a block quote, key: 4b1bdc96'
+            label: Text
+            name: 4b1bdc96
+            widget: string
+          - hint: >-
+              Original text: The rich text element allows you to create and
+              format headings, paragraphs, blockquotes, images, and video all in
+              one place instead of having to add and format them individually.
+              Just double-click and easily create content., key: 2e633c6a
+            label: Text
+            name: 2e633c6a
+            widget: text
+          - hint: 'Original text: This is a link inside of a rich text, key: 3a72e61a'
+            label: Text
+            name: 3a72e61a
+            widget: string
+          - hint: 'Original text: List item, key: 2aff8d35'
+            label: Text
+            name: 2aff8d35
+            widget: string
+          - hint: 'Original text: Caption goes here, key: 41a0e460'
+            label: Text
+            name: 41a0e460
+            widget: string
+          - hint: 'Original text: Colors, key: 78a3a990'
+            label: Text
+            name: 78a3a990
+            widget: string
+          - hint: 'Original text: Color Palette, key: -4b21e982'
+            label: Text
+            name: '-4b21e982'
+            widget: string
+          - hint: 'Original text: is-black, key: -4ed65664'
+            label: Text
+            name: '-4ed65664'
+            widget: string
+          - hint: 'Original text: is-white, key: -4db01a3a'
+            label: Text
+            name: '-4db01a3a'
+            widget: string
+          - hint: 'Original text: is-gray, key: 79564926'
+            label: Text
+            name: '79564926'
+            widget: string
+          - hint: 'Original text: is-pink, key: 795a4039'
+            label: Text
+            name: 795a4039
+            widget: string
+          - hint: 'Original text: Add pre-made Color Palettes, key: 26a0eb57'
+            label: Text
+            name: 26a0eb57
+            widget: string
+          - hint: >-
+              Original text: Get access to pre-made Color Palettes and paste
+              them below., key: -bba82b2
+            label: Text
+            name: '-bba82b2'
+            widget: string
+          - hint: 'Original text: View Color Palettes, key: -78c8af90'
+            label: Text
+            name: '-78c8af90'
+            widget: string
+          - hint: 'Original text: Click and paste Color Palette, key: 7861d930'
+            label: Text
+            name: 7861d930
+            widget: string
+          - hint: 'Original text: Background Color, key: -26192e0f'
+            label: Text
+            name: '-26192e0f'
+            widget: string
+          - hint: 'Original text: Manage recurring background colors., key: -7c93c156'
+            label: Text
+            name: '-7c93c156'
+            widget: string
+          - hint: 'Original text: background-color-black, key: 3c388ef6'
+            label: Text
+            name: 3c388ef6
+            widget: string
+          - hint: 'Original text: background-color-white, key: 3d5ecb20'
+            label: Text
+            name: 3d5ecb20
+            widget: string
+          - hint: 'Original text: background-color-gray, key: 5488508c'
+            label: Text
+            name: 5488508c
+            widget: string
+          - hint: 'Original text: background-color-pink, key: 548c479f'
+            label: Text
+            name: 548c479f
+            widget: string
+          - hint: 'Original text: background-color-blue, key: 5485f683'
+            label: Text
+            name: 5485f683
+            widget: string
+          - hint: 'Original text: Add pre-made Background Colors, key: 50473fc0'
+            label: Text
+            name: 50473fc0
+            widget: string
+          - hint: 'Original text: View Background Colors, key: 4de61807'
+            label: Text
+            name: 4de61807
+            widget: string
+          - hint: 'Original text: Text Color, key: -7487e150'
+            label: Text
+            name: '-7487e150'
+            widget: string
+          - hint: 'Original text: Manage recurring text colors., key: -43c141d7'
+            label: Text
+            name: '-43c141d7'
+            widget: string
+          - hint: 'Original text: text-color-white, key: -eee4b61'
+            label: Text
+            name: '-eee4b61'
+            widget: string
+          - hint: 'Original text: text-color-pink, key: -6bd94dc0'
+            label: Text
+            name: '-6bd94dc0'
+            widget: string
+          - hint: 'Original text: text-color-black, key: -1014878b'
+            label: Text
+            name: '-1014878b'
+            widget: string
+          - hint: 'Original text: text-color-blue, key: -6bdf9edc'
+            label: Text
+            name: '-6bdf9edc'
+            widget: string
+          - hint: 'Original text: Add pre-made Text Colors, key: 48bb961'
+            label: Text
+            name: 48bb961
+            widget: string
+          - hint: >-
+              Original text: Get access to pre-made Text Colors and paste them
+              below., key: 391639c0
+            label: Text
+            name: 391639c0
+            widget: string
+          - hint: 'Original text: View Text Colors, key: 772812e8'
+            label: Text
+            name: '772812e8'
+            widget: string
+          - hint: 'Original text: Effects, key: -a16ef1e'
+            label: Text
+            name: '-a16ef1e'
+            widget: string
+          - hint: 'Original text: Box Shadows, key: -5754f642'
+            label: Text
+            name: '-5754f642'
+            widget: string
+          - hint: >-
+              Original text: Shadows allow you to add depth and realism to
+              designs by positioning elements on a z-axis., key: -2b9907fd
+            label: Text
+            name: '-2b9907fd'
+            widget: string
+          - hint: >-
+              Original text: Want to learn how to use shadow classes the
+              Client-first way?, key: 212801b6
+            label: Text
+            name: 212801b6
+            widget: string
+          - hint: 'Original text: Watch Tutorial, key: 8b86fcf'
+            label: Text
+            name: 8b86fcf
+            widget: string
+          - hint: 'Original text: shadow-xxsmall, key: 28f7225a'
+            label: Text
+            name: 28f7225a
+            widget: string
+          - hint: 'Original text: shadow-xsmall, key: -30837324'
+            label: Text
+            name: '-30837324'
+            widget: string
+          - hint: 'Original text: shadow-small, key: 613eca1a'
+            label: Text
+            name: 613eca1a
+            widget: string
+          - hint: 'Original text: shadow-medium, key: -4412033e'
+            label: Text
+            name: '-4412033e'
+            widget: string
+          - hint: 'Original text: shadow-pink, key: -5ff721fd'
+            label: Text
+            name: '-5ff721fd'
+            widget: string
+          - hint: 'Original text: shadow-grey, key: -5ffb1894'
+            label: Text
+            name: '-5ffb1894'
+            widget: string
+          - hint: 'Original text: shadow-white, key: 6175013c'
+            label: Text
+            name: 6175013c
+            widget: string
+          - hint: 'Original text: shadow-xlarge, key: -30eb4cf0'
+            label: Text
+            name: '-30eb4cf0'
+            widget: string
+          - hint: 'Original text: shadow-xxlarge, key: 288f488e'
+            label: Text
+            name: 288f488e
+            widget: string
+          - hint: 'Original text: UI Elements, key: -5b365edd'
+            label: Text
+            name: '-5b365edd'
+            widget: string
+          - hint: 'Original text: Buttons, key: 719b5761'
+            label: Text
+            name: 719b5761
+            widget: string
+          - hint: 'Original text: button, key: -521dd8ce'
+            label: Text
+            name: '-521dd8ce'
+            widget: string
+          - hint: 'Original text: Button, key: 77471352'
+            label: Text
+            name: '77471352'
+            widget: string
+          - hint: 'Original text: is-small, key: -4de6515c'
+            label: Text
+            name: '-4de6515c'
+            widget: string
+          - hint: 'Original text: is-secondary, key: -35398b6f'
+            label: Text
+            name: '-35398b6f'
+            widget: string
+          - hint: 'Original text: is-link, key: 79586ebd'
+            label: Text
+            name: 79586ebd
+            widget: string
+          - hint: >-
+              Original text: To use on a dark background, simple use the add-on
+              class , key: 2cfd7751
+            label: Text
+            name: 2cfd7751
+            widget: string
+          - hint: 'Original text: is-alternate, key: -586abc69'
+            label: Text
+            name: '-586abc69'
+            widget: string
+          - hint: 'Original text: Buttons With Icons, key: -6afbdea1'
+            label: Text
+            name: '-6afbdea1'
+            widget: string
+          - hint: 'Original text: is-icon, key: 7956fb3c'
+            label: Text
+            name: 7956fb3c
+            widget: string
+          - hint: 'Original text: Form Elements, key: 6ae044d3'
+            label: Text
+            name: 6ae044d3
+            widget: string
+          - hint: 'Original text: field-label, key: -2be9ef9f'
+            label: Text
+            name: '-2be9ef9f'
+            widget: string
+          - hint: 'Original text: form-input, key: -45fe2a7f'
+            label: Text
+            name: '-45fe2a7f'
+            widget: string
+          - hint: 'Original text: .field-label, key: 3601c773'
+            label: Text
+            name: 3601c773
+            widget: string
+          - hint: 'Original text: is-text-area, key: -451f1bb6'
+            label: Text
+            name: '-451f1bb6'
+            widget: string
+          - hint: 'Original text: is-select-input, key: 76d83f7c'
+            label: Text
+            name: 76d83f7c
+            widget: string
+          - hint: 'Original text: Select one..., key: 57f3b1cc'
+            label: Text
+            name: 57f3b1cc
+            widget: string
+          - hint: 'Original text: First Choice, key: -491b32af'
+            label: Text
+            name: '-491b32af'
+            widget: string
+          - hint: 'Original text: Second Choice, key: 3c4172cd'
+            label: Text
+            name: 3c4172cd
+            widget: string
+          - hint: 'Original text: Third Choice, key: -1b351146'
+            label: Text
+            name: '-1b351146'
+            widget: string
+          - hint: 'Original text: form-checkbox, key: 1afaaeac'
+            label: Text
+            name: 1afaaeac
+            widget: string
+          - hint: 'Original text: Checkbox, key: 5f757fe3'
+            label: Text
+            name: 5f757fe3
+            widget: string
+          - hint: 'Original text: form-radio, key: -45856e4e'
+            label: Text
+            name: '-45856e4e'
+            widget: string
+          - hint: 'Original text: Radio, key: 4b123db'
+            label: Text
+            name: 4b123db
+            widget: string
+          - hint: 'Original text: Icons (Image), key: -1e9beab0'
+            label: Text
+            name: '-1e9beab0'
+            widget: string
+          - hint: 'Original text: icon-height-xxsmall, key: 4b851335'
+            label: Text
+            name: 4b851335
+            widget: string
+          - hint: 'Original text: icon-height-xsmall, key: -58b06b5f'
+            label: Text
+            name: '-58b06b5f'
+            widget: string
+          - hint: 'Original text: icon-height-small, key: 78b935b5'
+            label: Text
+            name: 78b935b5
+            widget: string
+          - hint: 'Original text: icon-height-medium, key: -6c3efb79'
+            label: Text
+            name: '-6c3efb79'
+            widget: string
+          - hint: 'Original text: icon-height-large, key: 78515be9'
+            label: Text
+            name: 78515be9
+            widget: string
+          - hint: 'Original text: icon-height-xlarge, key: -5918452b'
+            label: Text
+            name: '-5918452b'
+            widget: string
+          - hint: 'Original text: icon-height-custom1, key: -1078eff2'
+            label: Text
+            name: '-1078eff2'
+            widget: string
+          - hint: 'Original text: icon-1x1-xxsmall, key: 4f79a690'
+            label: Text
+            name: 4f79a690
+            widget: string
+          - hint: 'Original text: icon-1x1-xsmall, key: 5d1da9e6'
+            label: Text
+            name: 5d1da9e6
+            widget: string
+          - hint: 'Original text: icon-1x1-small, key: -581f1c30'
+            label: Text
+            name: '-581f1c30'
+            widget: string
+          - hint: 'Original text: icon-1x1-medium, key: 498f19cc'
+            label: Text
+            name: 498f19cc
+            widget: string
+          - hint: 'Original text: icon-1x1-large, key: -5886f5fc'
+            label: Text
+            name: '-5886f5fc'
+            widget: string
+          - hint: 'Original text: icon-1x1-xlarge, key: 5cb5d01a'
+            label: Text
+            name: 5cb5d01a
+            widget: string
+          - hint: 'Original text: icon-1x1-custom1, key: -c845c97'
+            label: Text
+            name: '-c845c97'
+            widget: string
+          - hint: 'Original text: Icons (HTML Embed), key: -4adc9b1d'
+            label: Text
+            name: '-4adc9b1d'
+            widget: string
+          - hint: >-
+              Original text: HTML embed icons enable you to control icon color
+              on hover., key: -106dc8c5
+            label: Text
+            name: '-106dc8c5'
+            widget: string
+          - hint: 'Original text: icon-embed-xxsmall, key: 7d6e14bf'
+            label: Text
+            name: 7d6e14bf
+            widget: string
+          - hint: 'Original text: icon-embed-xsmall, key: 66db39d7'
+            label: Text
+            name: 66db39d7
+            widget: string
+          - hint: 'Original text: icon-embed-small, key: -78d6ee41'
+            label: Text
+            name: '-78d6ee41'
+            widget: string
+          - hint: 'Original text: icon-embed-medium, key: 534ca9bd'
+            label: Text
+            name: 534ca9bd
+            widget: string
+          - hint: 'Original text: icon-embed-large, key: -793ec80d'
+            label: Text
+            name: '-793ec80d'
+            widget: string
+          - hint: 'Original text: icon-embed-xlarge, key: 6673600b'
+            label: Text
+            name: 6673600b
+            widget: string
+          - hint: 'Original text: icon-embed-custom1, key: 21701198'
+            label: Text
+            name: '21701198'
+            widget: string
+          - hint: 'Original text: Structure Classes, key: 3ae1b639'
+            label: Text
+            name: 3ae1b639
+            widget: string
+          - hint: >-
+              Original text: Defined and flexible core structure we can use on
+              all or most pages., key: 24021488
+            label: Text
+            name: '24021488'
+            widget: string
+          - hint: 'Original text: page-wrapper, key: 329acb55'
+            label: Text
+            name: 329acb55
+            widget: string
+          - hint: 'Original text: main-wrapper, key: 3a80a47f'
+            label: Text
+            name: 3a80a47f
+            widget: string
+          - hint: 'Original text: container-small, key: -28522f45'
+            label: Text
+            name: '-28522f45'
+            widget: string
+          - hint: 'Original text: container-medium, key: 135fca41'
+            label: Text
+            name: 135fca41
+            widget: string
+          - hint: 'Original text: container-large, key: -28ba0911'
+            label: Text
+            name: '-28ba0911'
+            widget: string
+          - hint: 'Original text: padding-global, key: 10e9acdf'
+            label: Text
+            name: 10e9acdf
+            widget: string
+          - hint: 'Original text: padding-section-small, key: -5efc9c9d'
+            label: Text
+            name: '-5efc9c9d'
+            widget: string
+          - hint: 'Original text: padding-section-medium, key: 74bc8c99'
+            label: Text
+            name: 74bc8c99
+            widget: string
+          - hint: 'Original text: padding-section-large, key: -5f647669'
+            label: Text
+            name: '-5f647669'
+            widget: string
+          - hint: 'Original text: button-group, key: -8f47bdc'
+            label: Text
+            name: '-8f47bdc'
+            widget: string
+          - hint: 'Original text: Max Widths, key: -6f3a0217'
+            label: Text
+            name: '-6f3a0217'
+            widget: string
+          - hint: >-
+              Original text: Use the max-width CSS property to contain inner
+              content to a maximum width., key: -558c9913
+            label: Text
+            name: '-558c9913'
+            widget: string
+          - hint: 'Original text: max-width-full, key: -ed2fdc1'
+            label: Text
+            name: '-ed2fdc1'
+            widget: string
+          - hint: 'Original text: max-width-full-tablet, key: 3ce671b4'
+            label: Text
+            name: 3ce671b4
+            widget: string
+          - hint: 'Original text: max-width-full-portrait, key: -218ac97'
+            label: Text
+            name: '-218ac97'
+            widget: string
+          - hint: 'Original text: max-width-full-landscape, key: -2f36ab53'
+            label: Text
+            name: '-2f36ab53'
+            widget: string
+          - hint: 'Original text: max-width-xxlarge, key: -5dfc3175'
+            label: Text
+            name: '-5dfc3175'
+            widget: string
+          - hint: 'Original text: max-width-xlarge, key: 7828f973'
+            label: Text
+            name: 7828f973
+            widget: string
+          - hint: 'Original text: max-width-large, key: 34bed18b'
+            label: Text
+            name: 34bed18b
+            widget: string
+          - hint: 'Original text: max-width-medium, key: 65024325'
+            label: Text
+            name: '65024325'
+            widget: string
+          - hint: 'Original text: max-width-small, key: 3526ab57'
+            label: Text
+            name: 3526ab57
+            widget: string
+          - hint: 'Original text: max-width-xsmall, key: 7890d33f'
+            label: Text
+            name: 7890d33f
+            widget: string
+          - hint: 'Original text: max-width-xxsmall, key: -5d9457a9'
+            label: Text
+            name: '-5d9457a9'
+            widget: string
+          - hint: 'Original text: Paddings, key: 31f1aaa2'
+            label: Text
+            name: 31f1aaa2
+            widget: string
+          - hint: 'Original text: Direction Classes, key: 109fc445'
+            label: Text
+            name: 109fc445
+            widget: string
+          - hint: 'Original text: padding-bottom, key: 88e4367'
+            label: Text
+            name: '88e4367'
+            widget: string
+          - hint: 'Original text: padding-top, key: -5987fe67'
+            label: Text
+            name: '-5987fe67'
+            widget: string
+          - hint: 'Original text: padding-vertical, key: 2737b1b2'
+            label: Text
+            name: 2737b1b2
+            widget: string
+          - hint: 'Original text: padding-horizontal, key: 7e873760'
+            label: Text
+            name: '7e873760'
+            widget: string
+          - hint: 'Original text: padding-left, key: 28846843'
+            label: Text
+            name: '28846843'
+            widget: string
+          - hint: 'Original text: padding-right, key: -17a0fea0'
+            label: Text
+            name: '-17a0fea0'
+            widget: string
+          - hint: 'Original text: Size Classes, key: ca50f07'
+            label: Text
+            name: ca50f07
+            widget: string
+          - hint: 'Original text: padding-0, key: -6b2e7e8c'
+            label: Text
+            name: '-6b2e7e8c'
+            widget: string
+          - hint: 'Original text: padding-tiny, key: 28881b3c'
+            label: Text
+            name: 28881b3c
+            widget: string
+          - hint: 'Original text: padding-xxsmall, key: -5bb29bb5'
+            label: Text
+            name: '-5bb29bb5'
+            widget: string
+          - hint: 'Original text: padding-xsmall, key: 2e4dc8cb'
+            label: Text
+            name: 2e4dc8cb
+            widget: string
+          - hint: 'Original text: padding-small, key: -17912bb5'
+            label: Text
+            name: '-17912bb5'
+            widget: string
+          - hint: 'Original text: padding-medium, key: 1abf38b1'
+            label: Text
+            name: 1abf38b1
+            widget: string
+          - hint: 'Original text: padding-large, key: -17f90581'
+            label: Text
+            name: '-17f90581'
+            widget: string
+          - hint: 'Original text: padding-xlarge, key: 2de5eeff'
+            label: Text
+            name: 2de5eeff
+            widget: string
+          - hint: 'Original text: padding-xxlarge, key: -5c1a7581'
+            label: Text
+            name: '-5c1a7581'
+            widget: string
+          - hint: 'Original text: padding-huge, key: 2882d2e7'
+            label: Text
+            name: 2882d2e7
+            widget: string
+          - hint: 'Original text: padding-xhuge, key: -174cb199'
+            label: Text
+            name: '-174cb199'
+            widget: string
+          - hint: 'Original text: padding-xxhuge, key: 2e9242e7'
+            label: Text
+            name: 2e9242e7
+            widget: string
+          - hint: 'Original text: padding-custom1, key: 484f6124'
+            label: Text
+            name: 484f6124
+            widget: string
+          - hint: 'Original text: padding-custom2, key: 484f6125'
+            label: Text
+            name: 484f6125
+            widget: string
+          - hint: 'Original text: padding-custom3, key: 484f6126'
+            label: Text
+            name: 484f6126
+            widget: string
+          - hint: 'Original text: Margins, key: -6ac3379b'
+            label: Text
+            name: '-6ac3379b'
+            widget: string
+          - hint: 'Original text: margin-bottom, key: 7c565f2a'
+            label: Text
+            name: 7c565f2a
+            widget: string
+          - hint: 'Original text: margin-top, key: 756c34b6'
+            label: Text
+            name: 756c34b6
+            widget: string
+          - hint: 'Original text: margin-vertical, key: -3698174b'
+            label: Text
+            name: '-3698174b'
+            widget: string
+          - hint: 'Original text: margin-horizontal, key: 5585b9a3'
+            label: Text
+            name: 5585b9a3
+            widget: string
+          - hint: 'Original text: margin-left, key: 381698c6'
+            label: Text
+            name: 381698c6
+            widget: string
+          - hint: 'Original text: margin-right, key: -34ed1ec3'
+            label: Text
+            name: '-34ed1ec3'
+            widget: string
+          - hint: 'Original text: margin-0, key: e81d7d1'
+            label: Text
+            name: e81d7d1
+            widget: string
+          - hint: 'Original text: margin-tiny, key: 381a4bbf'
+            label: Text
+            name: 381a4bbf
+            widget: string
+          - hint: 'Original text: margin-xxsmall, key: -56773f18'
+            label: Text
+            name: '-56773f18'
+            widget: string
+          - hint: 'Original text: margin-xsmall, key: -5dea1b72'
+            label: Text
+            name: '-5dea1b72'
+            widget: string
+          - hint: 'Original text: margin-small, key: -34dd4bd8'
+            label: Text
+            name: '-34dd4bd8'
+            widget: string
+          - hint: 'Original text: margin-medium, key: -7178ab8c'
+            label: Text
+            name: '-7178ab8c'
+            widget: string
+          - hint: 'Original text: margin-large, key: -354525a4'
+            label: Text
+            name: '-354525a4'
+            widget: string
+          - hint: 'Original text: margin-xlarge, key: -5e51f53e'
+            label: Text
+            name: '-5e51f53e'
+            widget: string
+          - hint: 'Original text: margin-xxlarge, key: -56df18e4'
+            label: Text
+            name: '-56df18e4'
+            widget: string
+          - hint: 'Original text: margin-huge, key: 3815036a'
+            label: Text
+            name: 3815036a
+            widget: string
+          - hint: 'Original text: margin-xhuge, key: -3498d1bc'
+            label: Text
+            name: '-3498d1bc'
+            widget: string
+          - hint: 'Original text: margin-xxhuge, key: -5da5a156'
+            label: Text
+            name: '-5da5a156'
+            widget: string
+          - hint: 'Original text: margin-custom1, key: 4d8abdc1'
+            label: Text
+            name: 4d8abdc1
+            widget: string
+          - hint: 'Original text: margin-custom2, key: 4d8abdc2'
+            label: Text
+            name: 4d8abdc2
+            widget: string
+          - hint: 'Original text: margin-custom3, key: 4d8abdc3'
+            label: Text
+            name: 4d8abdc3
+            widget: string
+          - hint: 'Original text: Utility Classes, key: -554a76ce'
+            label: Text
+            name: '-554a76ce'
+            widget: string
+          - hint: >-
+              Original text: Useful utility classes we like to use in most of
+              our projects to build faster., key: -4ee2118
+            label: Text
+            name: '-4ee2118'
+            widget: string
+          - hint: 'Original text: hide, key: 30dd42'
+            label: Text
+            name: 30dd42
+            widget: string
+          - hint: 'Original text: This element is hidden, key: bfe805a'
+            label: Text
+            name: bfe805a
+            widget: string
+          - hint: 'Original text: hide-tablet, key: -527642af'
+            label: Text
+            name: '-527642af'
+            widget: string
+          - hint: 'Original text: hide-mobile-portrait, key: -3429a225'
+            label: Text
+            name: '-3429a225'
+            widget: string
+          - hint: 'Original text: hide-mobile-landscape, key: -3f446785'
+            label: Text
+            name: '-3f446785'
+            widget: string
+          - hint: 'Original text: overflow-visible, key: -5c729a59'
+            label: Text
+            name: '-5c729a59'
+            widget: string
+          - hint: 'Original text: overflow-hidden, key: -6d7ad22b'
+            label: Text
+            name: '-6d7ad22b'
+            widget: string
+          - hint: 'Original text: overflow-auto, key: 21707c9a'
+            label: Text
+            name: 21707c9a
+            widget: string
+          - hint: 'Original text: overflow-scroll, key: -5b038908'
+            label: Text
+            name: '-5b038908'
+            widget: string
+          - hint: 'Original text: pointer-events-on, key: 5dfdcb83'
+            label: Text
+            name: 5dfdcb83
+            widget: string
+          - hint: 'Original text: pointer-events-off, key: 61bba44b'
+            label: Text
+            name: 61bba44b
+            widget: string
+          - hint: 'Original text: layer, key: 61fd551'
+            label: Text
+            name: 61fd551
+            widget: string
+          - hint: 'Original text: div-square, key: 35b129d9'
+            label: Text
+            name: 35b129d9
+            widget: string
+          - hint: 'Original text: spacing-clean, key: 7387303f'
+            label: Text
+            name: 7387303f
+            widget: string
+          - hint: 'Original text: align-center, key: 325fa01d'
+            label: Text
+            name: 325fa01d
+            widget: string
+          - hint: 'Original text: z-index-1, key: 5f060ba3'
+            label: Text
+            name: 5f060ba3
+            widget: string
+          - hint: 'Original text: z-index-2, key: 5f060ba4'
+            label: Text
+            name: 5f060ba4
+            widget: string
+          - hint: 'Original text: display-inlineflex, key: 29f753fd'
+            label: Text
+            name: 29f753fd
+            widget: string
+          - hint: 'Original text: margin-top-auto, key: 34e4c66'
+            label: Text
+            name: 34e4c66
+            widget: string
+          - hint: 'Original text: Pop-culture guide, key: 6acdab6e'
+            label: Text
+            name: 6acdab6e
+            widget: string
+          - hint: 'Original text: Let''s be badass, key: 7c8f0a60'
+            label: Text
+            name: 7c8f0a60
+            widget: string
+          - hint: 'Original text: FItting is, key: -28a1f195'
+            label: Text
+            name: '-28a1f195'
+            widget: string
+          - hint: 'Original text: boring, key: -52737803'
+            label: Text
+            name: '-52737803'
+            widget: string
+          - hint: >-
+              Original text: In a world where fitting in is the norm, I make it
+              my business to help brands break the mould and stand out by being
+              true to themselves and, in turn, build their legacy., key:
+              -2bdb1fd3
+            label: Text
+            name: '-2bdb1fd3'
+            widget: text
+          - hint: 'Original text: Why so, key: -65994e2c'
+            label: Text
+            name: '-65994e2c'
+            widget: string
+          - hint: 'Original text: Badass?, key: 4e905f43'
+            label: Text
+            name: 4e905f43
+            widget: string
+          - hint: >-
+              Original text: I’m the founder and brand strategist behind
+              Badassery by B and the host of ‘The Art of Branding’ Podcast. I
+              practice what I preach, I put my money where my mouth is., key:
+              -1eb9a63e
+            label: Text
+            name: '-1eb9a63e'
+            widget: text
+          - hint: >-
+              Original text: Over the past ten years, armed with my Bachelor of
+              Business degree and a ton of Aussie edginess, I’ve advised,
+              guided, and molded companies of many sizes and sectors on two
+              continents to reframe their branding strategy and obliterate their
+              sales targets., key: 37e1323
+            label: Text
+            name: '37e1323'
+            widget: text
+          - hint: 'Original text: Let''s get, key: 416c2c1d'
+            label: Text
+            name: 416c2c1d
+            widget: string
+          - hint: 'Original text: Personal, key: 1e448a60'
+            label: Text
+            name: 1e448a60
+            widget: string
+          - hint: 'Original text: 💃 Latin dancing , key: 6bf9cba6'
+            label: Text
+            name: 6bf9cba6
+            widget: string
+          - hint: >-
+              Original text: I love Latin dancing, salsa, bachata, kizomba -
+              basically, anything that gets the blood pumping., key: -1e25afe0
+            label: Text
+            name: '-1e25afe0'
+            widget: text
+          - hint: 'Original text:  🏙 Big city girl, key: 604e494e'
+            label: Text
+            name: 604e494e
+            widget: string
+          - hint: >-
+              Original text: I’m a city gal by heart. Bachelorette penthouse
+              pad? Yes, please! 🙏, key: 68d6bd1f
+            label: Text
+            name: 68d6bd1f
+            widget: string
+          - hint: 'Original text: 🎭 Masks are fun, key: 1761be8b'
+            label: Text
+            name: 1761be8b
+            widget: string
+          - hint: >-
+              Original text: I’m into masks. Whoa, whoa, whoa, watch your blood
+              pressure, boys and girls, and form an orderly queue! I mean
+              masquerade ball masks!, key: 2862cba9
+            label: Text
+            name: 2862cba9
+            widget: text
+          - hint: 'Original text: 👗 Dress up!, key: -4cb3a989'
+            label: Text
+            name: '-4cb3a989'
+            widget: string
+          - hint: >-
+              Original text: Any reason to dress up - at least five tiers higher
+              than the occasion calls for, and I’m , key: -7dd2e653
+            label: Text
+            name: '-7dd2e653'
+            widget: string
+          - hint: 'Original text: there, baby, key: -5d67b452'
+            label: Text
+            name: '-5d67b452'
+            widget: string
+          - hint: >-
+              Original text: ! I daydream of going to the grand masked ball in
+              Versailles one day…, key: -783463d5
+            label: Text
+            name: '-783463d5'
+            widget: string
+          - hint: 'Original text: sigh, key: 35ddb7'
+            label: Text
+            name: 35ddb7
+            widget: string
+          - hint: 'Original text: Roo, key: 141b2'
+            label: Text
+            name: 141b2
+            widget: string
+          - hint: >-
+              Original text: Fine, but why is it wearing shades and brandishing
+              a baseball bat?, key: 488709a4
+            label: Text
+            name: 488709a4
+            widget: string
+          - hint: >-
+              Original text: For me, Roo perfectly represents my core values: ,
+              key: 3fb9e973
+            label: Text
+            name: 3fb9e973
+            widget: string
+          - hint: >-
+              Original text: 1. Be edgy, creative, and open-minded, key:
+              -779d1177
+            label: Text
+            name: '-779d1177'
+            widget: string
+          - hint: 'Original text: 2.Embrace and drive change, key: -141b2a00'
+            label: Text
+            name: '-141b2a00'
+            widget: string
+          - hint: 'Original text: 3. Passion and differentiation, key: 4578f9ae'
+            label: Text
+            name: 4578f9ae
+            widget: string
+          - hint: >-
+              Original text: Roo was a tiny little Joey once, but now look at
+              her. It’s my job to unleash your badass potential to make you and
+              your brand strategy as formidable as Roo is now., key: -5631527d
+            label: Text
+            name: '-5631527d'
+            widget: text
+          - hint: >-
+              Original text: The badass is back in town and taking names 👊,
+              key: 3c24824d
+            label: Text
+            name: 3c24824d
+            widget: string
+          - hint: 'Original text: WHat is , key: -25c03726'
+            label: Text
+            name: '-25c03726'
+            widget: string
+          - hint: 'Original text: My WHY?, key: -465a3495'
+            label: Text
+            name: '-465a3495'
+            widget: string
+          - hint: >-
+              Original text: My 'Why' is to challenge the norm and emphasize the
+              importance of doing what's true to oneself rather than what's
+              expected by society.By uncovering a brand’s unique purpose and I
+              use it to create a memorable and distinctive identity.In a world
+              where fitting in is often the norm, I strive for brands to stand
+              out by being true to themselves and in turn build their legacy.,
+              key: 45d99dc2
+            label: Text
+            name: 45d99dc2
+            widget: text
+          - hint: 'Original text: Find your Why , key: -581ba442'
+            label: Text
+            name: '-581ba442'
+            widget: string
+          - hint: 'Original text: Word from other mobsters, key: 5d4554b5'
+            label: Text
+            name: 5d4554b5
+            widget: string
+          - hint: >-
+              Original text: "I just had a look at your pop culture guide.
+              OMG!!!! I’m out of words. It’s so amazing. Loved every bit of
+              it.", key: -382b504b
+            label: Text
+            name: '-382b504b'
+            widget: text
+          - hint: 'Original text: Javeria Zafar, key: -389e2bac'
+            label: Text
+            name: '-389e2bac'
+            widget: string
+          - hint: >-
+              Original text: "Just opened the guide, and HOLY GUACCAMOLE it’s
+              well-designed and engaging to read, I’m impressed.", key: 1b4e374a
+            label: Text
+            name: 1b4e374a
+            widget: text
+          - hint: 'Original text: Jesper, key: -7bf4245b'
+            label: Text
+            name: '-7bf4245b'
+            widget: string
+          - hint: >-
+              Original text: "FAM THIS IS AWESOMEEEEETHESE EMAILS ARE ACTUALLY
+              THE BEST", key: 168e06a3
+            label: Text
+            name: 168e06a3
+            widget: string
+          - hint: 'Original text: Taylor Tudisco, key: 73a609c'
+            label: Text
+            name: 73a609c
+            widget: string
+          - hint: >-
+              Original text: "GIRL THAT NEWSLETTER IS FIRE! 🔥 🔥 🔥 At first,
+              I’m thinking, ‘is this too long?’ But the whole thing was so
+              interesting and so on point. Well done 👏", key: -1b73b81
+            label: Text
+            name: '-1b73b81'
+            widget: text
+          - hint: 'Original text: Gemma Haigh, key: 4e6665f4'
+            label: Text
+            name: 4e6665f4
+            widget: string
+          - hint: >-
+              Original text: "Loved your newsletter this week btw, really got me
+              thinking about my offers. Loved the durex ad too hahaha.", key:
+              50fdf41
+            label: Text
+            name: 50fdf41
+            widget: text
+          - hint: 'Original text: Joe Willson, key: 24a8dbe0'
+            label: Text
+            name: 24a8dbe0
+            widget: string
+          - hint: >-
+              Original text: "As ever, you make me laugh and, for me, that is
+              such a draw! Then you add in serious badass solutions that really
+              are off the wall. Put a dollop of honey-butterscotch ice cream on
+              top with good examples. And round it up with good, tempting
+              advice!", key: 12876b1b
+            label: Text
+            name: 12876b1b
+            widget: text
+          - hint: 'Original text: Elen Sentier, key: -30d8fc52'
+            label: Text
+            name: '-30d8fc52'
+            widget: string
+          - hint: >-
+              Original text: "After reading your Pop Culture Guide to Branding
+              Strategy, I finally feel empowered to create my personal brand
+              strategy. What a creative, fun, and insightful guide.", key:
+              5a9ac2c7
+            label: Text
+            name: 5a9ac2c7
+            widget: text
+          - hint: 'Original text: Giorgia (Đurđija) Savić, key: 62cb60b5'
+            label: Text
+            name: 62cb60b5
+            widget: string
+          - hint: 'Original text: "Loving the Badass newsletter! , key: -19011b22'
+            label: Text
+            name: '-19011b22'
+            widget: string
+          - hint: >-
+              Original text: It’s jam-packed with value for people who want to
+              be different, connect with their audience, and really unleash that
+              Badass potential they have inside. , key: -515557f1
+            label: Text
+            name: '-515557f1'
+            widget: text
+          - hint: 'Original text: I highly recommend reading.", key: 697eb622'
+            label: Text
+            name: 697eb622
+            widget: string
+          - hint: 'Original text: Michael Clift, key: 6cf08a75'
+            label: Text
+            name: 6cf08a75
+            widget: string
+          - hint: >-
+              Original text: Your pop culture guide is badass btw! Great job!
+              You nailed it with that subcriber value drop! 👏, key: -308b6757
+            label: Text
+            name: '-308b6757'
+            widget: text
+          - hint: 'Original text: Brooke Braga, key: 38dfa95'
+            label: Text
+            name: 38dfa95
+            widget: string
+          - hint: >-
+              Original text: "That guide is pure gold. One of the top 3 most
+              valuable freebies I got this year.", key: 5f4089f5
+            label: Text
+            name: 5f4089f5
+            widget: string
+          - hint: 'Original text: Meri Matevosyan, key: -79237e7e'
+            label: Text
+            name: '-79237e7e'
+            widget: string
+          - hint: 'Original text: "Wooooow B!, key: -2ccbd33e'
+            label: Text
+            name: '-2ccbd33e'
+            widget: string
+          - hint: 'Original text: Just got the Pop Culture Guide., key: -3073b0d6'
+            label: Text
+            name: '-3073b0d6'
+            widget: string
+          - hint: >-
+              Original text: Absolutely amazing. I love that you used
+              caricatures and images. It makes it so much friendlier., key:
+              -7099b6e2
+            label: Text
+            name: '-7099b6e2'
+            widget: text
+          - hint: >-
+              Original text: The color combination you chose for your brand is
+              very appealing too., key: -2765d838
+            label: Text
+            name: '-2765d838'
+            widget: string
+          - hint: >-
+              Original text: And the information you share in it is very
+              useful.", key: 3dcf05a6
+            label: Text
+            name: 3dcf05a6
+            widget: string
+          - hint: >-
+              Original text: "Yep your newsletter makes me feel uncomfortable.
+              That's a compliment by the way.", key: -547c43d1
+            label: Text
+            name: '-547c43d1'
+            widget: string
+          - hint: 'Original text: Steve Jackson, key: -6613363a'
+            label: Text
+            name: '-6613363a'
+            widget: string
+          - hint: >-
+              Original text: "Slay the branding game! Here we go. With your neat
+              newsletter, I feel like I’m ahead of the game here, Beatrice
+              Gutknecht.", key: -20ff6dce
+            label: Text
+            name: '-20ff6dce'
+            widget: text
+          - hint: 'Original text: Paula Naeff, key: -c1e4cb5'
+            label: Text
+            name: '-c1e4cb5'
+            widget: string
+          - hint: 'Original text: The art, key: 12a2be14'
+            label: Text
+            name: 12a2be14
+            widget: string
+          - hint: 'Original text:  Of, key: 8217'
+            label: Text
+            name: '8217'
+            widget: string
+          - hint: 'Original text: branding , key: -2ee36b7b'
+            label: Text
+            name: '-2ee36b7b'
+            widget: string
+          - hint: >-
+              Original text: Welcome to "The Art of Branding," the branding
+              strategy podcast for entrepreneurs and service-based businesses to
+              stop throwing money at marketing and reach the other 95% of their
+              audience. , key: cd6e56
+            label: Text
+            name: cd6e56
+            widget: text
+          - hint: >-
+              Original text: Differentiate to dominate with your host, Beatrice
+              Gutknecht, aka #BadasserybyB and badass guests unleashing their
+              expertise on everything from building a solid why and positioning
+              to developing a visual identity and globalizing your brand. , key:
+              -574888f5
+            label: Text
+            name: '-574888f5'
+            widget: text
+          - hint: 'Original text: Listen on Spotify, key: -44952ece'
+            label: Text
+            name: '-44952ece'
+            widget: string
+          - hint: 'Original text: Listen on Amazon, key: -18dc1374'
+            label: Text
+            name: '-18dc1374'
+            widget: string
+          - hint: 'Original text: Listen on Castbox, key: 53a6b0a4'
+            label: Text
+            name: 53a6b0a4
+            widget: string
+          - hint: 'Original text: Listen on Apple Podcast, key: e3a7096'
+            label: Text
+            name: e3a7096
+            widget: string
+          - hint: 'Original text: Differentiate your brand, key: -6f8b64e8'
+            label: Text
+            name: '-6f8b64e8'
+            widget: string
+          - hint: 'Original text: Badassery by B | YouTube, key: 35ba0188'
+            label: Text
+            name: 35ba0188
+            widget: string
+          - hint: 'Original text: Contributors, key: 5bcf0f18'
+            label: Text
+            name: 5bcf0f18
+            widget: string
+          - hint: 'Original text: Visit author, key: -7078e9e0'
+            label: Text
+            name: '-7078e9e0'
+            widget: string
+          - hint: 'Original text: All Posts, key: 4b6bc54'
+            label: Text
+            name: 4b6bc54
+            widget: string
+          - hint: 'Original text: Published on, key: -64fd368f'
+            label: Text
+            name: '-64fd368f'
+            widget: string
+          - hint: 'Original text: The, key: 14851'
+            label: Text
+            name: '14851'
+            widget: string
+          - hint: 'Original text: badassery, key: 74841790'
+            label: Text
+            name: '74841790'
+            widget: string
+          - hint: 'Original text: Mob, key: 12ee0'
+            label: Text
+            name: 12ee0
+            widget: string
+          - hint: 'Original text: blog, key: 2e2fa2'
+            label: Text
+            name: 2e2fa2
+            widget: string
+          - hint: 'Original text: Read more, key: 31997f7f'
+            label: Text
+            name: 31997f7f
+            widget: string
+          - hint: 'Original text: Cloud Focus, key: -50fb3d13'
+            label: Text
+            name: '-50fb3d13'
+            widget: string
+          - hint: >-
+              Original text: Branding, marketing & digital strategy, key:
+              7dea5ebe
+            label: Text
+            name: 7dea5ebe
+            widget: string
+          - hint: >-
+              Original text: Building and implementation of branding and
+              marketing strategy for each business sector., key: d11d3db
+            label: Text
+            name: d11d3db
+            widget: string
+          - hint: >-
+              Original text: Management of websites and social media platforms,
+              key: 784ca956
+            label: Text
+            name: 784ca956
+            widget: string
+          - hint: 'Original text: Marketing campaigns, key: -18112037'
+            label: Text
+            name: '-18112037'
+            widget: string
+          - hint: >-
+              Original text: Creation of social media campaigns, including
+              competitions, brand awareness, and collaborations with the local
+              art scene., key: -192a3e4f
+            label: Text
+            name: '-192a3e4f'
+            widget: text
+          - hint: 'Original text: Business Growth, key: 6e34f627'
+            label: Text
+            name: 6e34f627
+            widget: string
+          - hint: >-
+              Original text: Business expansion brainstorming and ideation.,
+              key: 5c8650c8
+            label: Text
+            name: 5c8650c8
+            widget: string
+          - hint: >-
+              Original text: Hubspot CRM for B2B and B2C markets., key:
+              -5e918a03
+            label: Text
+            name: '-5e918a03'
+            widget: string
+          - hint: >-
+              Original text: Creating and implementing business and marketing
+              strategies and campaigns., key: 1d3b1031
+            label: Text
+            name: 1d3b1031
+            widget: string
+          - hint: >-
+              Original text: Employee handbook creation, role descriptions, and
+              recruitment., key: -3c5d1d9
+            label: Text
+            name: '-3c5d1d9'
+            widget: string
+          - hint: 'Original text: Strand Hotel & Cruise, key: 61f1e075'
+            label: Text
+            name: 61f1e075
+            widget: string
+          - hint: >-
+              Original text: Developed impactful marketing, strategy, and
+              communications plans for brand awareness, tactical campaigns,
+              brand amplification, and loyalty program support. How?, key:
+              -30fbad89
+            label: Text
+            name: '-30fbad89'
+            widget: text
+          - hint: >-
+              Original text: Managed PR, influencer agencies, and media
+              communication, resulting in a significant readership circulation
+              of over 33 million., key: -12e4c711
+            label: Text
+            name: '-12e4c711'
+            widget: text
+          - hint: >-
+              Original text: Executed integrated marketing campaigns, generating
+              over US$500K in revenue, 750K social media engagements, and 1
+              million reactions., key: -35756368
+            label: Text
+            name: '-35756368'
+            widget: text
+          - hint: >-
+              Original text: Utilized email marketing and membership programs,
+              driving an average of US$4K in additional monthly attributed
+              revenue., key: -3f99f4ae
+            label: Text
+            name: '-3f99f4ae'
+            widget: text
+          - hint: 'Original text: Partnerships, key: 1486a20f'
+            label: Text
+            name: 1486a20f
+            widget: string
+          - hint: >-
+              Original text: Secured partnerships with Thai Airways, Singapore
+              Airways, CB Bank, Frank Muller, Balmain, Moët & Chandon, and Veuve
+              Clicquot., key: -6fddb4a6
+            label: Text
+            name: '-6fddb4a6'
+            widget: text
+          - hint: >-
+              Original text: Photographer & videographer management, key:
+              32f98792
+            label: Text
+            name: 32f98792
+            widget: string
+          - hint: >-
+              Original text: Worked with local and international photographers
+              and videographers, providing direction, mood boards, and
+              guidelines to ensure the brand's vision was captured effectively.,
+              key: -4c3018cd
+            label: Text
+            name: '-4c3018cd'
+            widget: text
+          - hint: >-
+              Original text: Social media & influencer collaborations, key:
+              -4ebe6458
+            label: Text
+            name: '-4ebe6458'
+            widget: string
+          - hint: >-
+              Original text: Managed social media channels, websites, and
+              content creation, crafting engaging copy and content., key:
+              -4462a75c
+            label: Text
+            name: '-4462a75c'
+            widget: text
+          - hint: >-
+              Original text: Collaborated with US and international influencers
+              amplifying brand reach., key: 5ef67abb
+            label: Text
+            name: 5ef67abb
+            widget: string
+          - hint: 'Original text: Began star hotel, key: -26a58dab'
+            label: Text
+            name: '-26a58dab'
+            widget: string
+          - hint: >-
+              Original text: Brand development & collateral design:, key:
+              -449a3d15
+            label: Text
+            name: '-449a3d15'
+            widget: string
+          - hint: >-
+              Original text: Establishing branding and visibility at the hotel,
+              online through social media platforms, website, and offline media
+              from pre-opening., key: 6b8f222f
+            label: Text
+            name: 6b8f222f
+            widget: text
+          - hint: >-
+              Original text: Create marketing designs such as menus, logos, and
+              brochures using , key: 6e24ffc8
+            label: Text
+            name: 6e24ffc8
+            widget: string
+          - hint: 'Original text: Adobe Suite. , key: 135f8d39'
+            label: Text
+            name: 135f8d39
+            widget: string
+          - hint: >-
+              Original text: Copywriting for both online and offline content.,
+              key: 287acc79
+            label: Text
+            name: 287acc79
+            widget: string
+          - hint: >-
+              Original text: Direction of 3rd party team to optimize paid
+              search, social campaigns, and website strategy., key: 6ef7e4bd
+            label: Text
+            name: 6ef7e4bd
+            widget: text
+          - hint: >-
+              Original text: Recommend and prioritize budget allocations for the
+              marketing plan., key: 7741d631
+            label: Text
+            name: 7741d631
+            widget: string
+          - hint: >-
+              Original text: Branding and marketing Consultant - Freelance, key:
+              -3b95e341
+            label: Text
+            name: '-3b95e341'
+            widget: string
+          - hint: >-
+              Original text: Havana Yangon | Social media strategy, management &
+              collateral designs, key: -3647bb78
+            label: Text
+            name: '-3647bb78'
+            widget: string
+          - hint: >-
+              Original text: Social media content creation, copywriting, and
+              management across Facebook and Instagram platforms with a
+              combination of paid and unpaid advertising campaigns targeting
+              brand awareness., key: -29dfe457
+            label: Text
+            name: '-29dfe457'
+            widget: text
+          - hint: >-
+              Original text: These campaigns led to an increase of over 5,000
+              followers, a post reach of over 10,000, post engagements of over
+              1,300, and several sold-out events over 3 months., key: 7134ff72
+            label: Text
+            name: 7134ff72
+            widget: text
+          - hint: >-
+              Original text: Branding and marketing consultation for the new
+              restaurant and salsa bar, Havana Yangon., key: 487eab61
+            label: Text
+            name: 487eab61
+            widget: string
+          - hint: >-
+              Original text: Development of food and beverage menu designs.,
+              key: 48b5e060
+            label: Text
+            name: 48b5e060
+            widget: string
+          - hint: >-
+              Original text: Yandayar Trading | Company Profile Design, key:
+              -77d19c6c
+            label: Text
+            name: '-77d19c6c'
+            widget: string
+          - hint: >-
+              Original text: Yandayar Trading company profile design and content
+              writing., key: -429712e
+            label: Text
+            name: '-429712e'
+            widget: string
+          - hint: >-
+              Original text: Social media and marketing recommendations., key:
+              -5fc5995a
+            label: Text
+            name: '-5fc5995a'
+            widget: string
+          - hint: 'Original text: The full company profile, key: -19e1161c'
+            label: Text
+            name: '-19e1161c'
+            widget: string
+          - hint: 'Original text: WDC | Marketing collateral design, key: -1f275101'
+            label: Text
+            name: '-1f275101'
+            widget: string
+          - hint: >-
+              Original text: Startup recruitment service company Wun Dan Connect
+              (WDC) marketing and branding consultation., key: 27441212
+            label: Text
+            name: '27441212'
+            widget: text
+          - hint: >-
+              Original text: Design logo, signboard, brochure, business cards,
+              and stationery set., key: 1143c900
+            label: Text
+            name: 1143c900
+            widget: string
+          - hint: 'Original text: Your Property Finder, key: 4233704'
+            label: Text
+            name: '4233704'
+            widget: string
+          - hint: >-
+              Original text: Collaborated with the team to revamp and elevate
+              the branding and digital presence to show differentiation and
+              position the real estate services so that Your Property Finder is
+              recognized. , key: -294167fe
+            label: Text
+            name: '-294167fe'
+            widget: text
+          - hint: >-
+              Original text: Partnered with an in-house graphic designer to
+              create impactful branding and marketing collateral designs that
+              aligned with the brand strategy., key: -7558d52d
+            label: Text
+            name: '-7558d52d'
+            widget: text
+          - hint: 'Original text: Wa Minn, key: -5e54400e'
+            label: Text
+            name: '-5e54400e'
+            widget: string
+          - hint: >-
+              Original text: Developed internal branding and conducted market
+              research for effective market positioning targeting foreign MNCs
+              for investment and luxury developments, including the prestigious
+              Kalaw Hills Estate., key: 66e96b36
+            label: Text
+            name: 66e96b36
+            widget: text
+          - hint: >-
+              Original text: Further developed this through brand stories
+              internally and for the audience journey. , key: -39ac64e8
+            label: Text
+            name: '-39ac64e8'
+            widget: string
+          - hint: >-
+              Original text: Building brand identity, guiding 3rd party
+              designers with the creation and implementation of:, key: 1097b821
+            label: Text
+            name: 1097b821
+            widget: text
+          - hint: 'Original text: Brand collateral and guidelines, key: -cc10704'
+            label: Text
+            name: '-cc10704'
+            widget: string
+          - hint: 'Original text: Brand logos, key: -1cf609d1'
+            label: Text
+            name: '-1cf609d1'
+            widget: string
+          - hint: 'Original text: Marketing collateral, key: -934c76f'
+            label: Text
+            name: '-934c76f'
+            widget: string
+          - hint: 'Original text: Video, key: 4ed245b'
+            label: Text
+            name: 4ed245b
+            widget: string
+          - hint: 'Original text: Press pack, key: -1d1b440a'
+            label: Text
+            name: '-1d1b440a'
+            widget: string
+          - hint: 'Original text: Websites, key: -25e368a8'
+            label: Text
+            name: '-25e368a8'
+            widget: string
+          - hint: 'Original text: UNleash your , key: 4e2c4a91'
+            label: Text
+            name: 4e2c4a91
+            widget: string
+          - hint: 'Original text: Brand potential, key: -4ca8955b'
+            label: Text
+            name: '-4ca8955b'
+            widget: string
+          - hint: 'Original text: badass, key: -533f3ba4'
+            label: Text
+            name: '-533f3ba4'
+            widget: string
+          - hint: 'Original text: (Actually) Stand out and own it. , key: 6c0f9816'
+            label: Text
+            name: 6c0f9816
+            widget: string
+          - hint: >-
+              Original text: 1:1 branding strategy consulting for service-based
+              businesses to reach the 95% that don’t know you exist!, key:
+              -9499cef
+            label: Text
+            name: '-9499cef'
+            widget: text
+          - hint: 'Original text: Badassery by B, key: -469bca97'
+            label: Text
+            name: '-469bca97'
+            widget: string
+          - hint: 'Original text: you''re in!, key: 11870217'
+            label: Text
+            name: '11870217'
+            widget: string
+          - hint: >-
+              Original text: Thank you for joining the mob - The badass brand
+              mob., key: -2ccfbb7c
+            label: Text
+            name: '-2ccfbb7c'
+            widget: string
+          - hint: >-
+              Original text: Roo’s on his way to your inbox with a welcome
+              gift., key: -3a2192cb
+            label: Text
+            name: '-3a2192cb'
+            widget: string
+          - hint: >-
+              Original text: Be sure to find the email and download your gift to
+              confirm your mob membership. (If Roo misses her way, check out
+              your promotions or spam folder.), key: 5a8731ba
+            label: Text
+            name: 5a8731ba
+            widget: text
+          - hint: >-
+              Original text: And depending on what email platform you use, here
+              are simple actions you can take to ensure I hit your inbox; , key:
+              fd53b13
+            label: Text
+            name: fd53b13
+            widget: text
+          - hint: 'Original text: Gmail- , key: 6b62e891'
+            label: Text
+            name: 6b62e891
+            widget: string
+          - hint: 'Original text: add to ‘Primary’ inbox, key: 63e193ef'
+            label: Text
+            name: 63e193ef
+            widget: string
+          - hint: 'Original text: Outlook - a, key: 4d55c15b'
+            label: Text
+            name: 4d55c15b
+            widget: string
+          - hint: 'Original text: dd to Safe Senders, key: -78913ed0'
+            label: Text
+            name: '-78913ed0'
+            widget: string
+          - hint: "Original text: Apple Mail \_- a, key: -1ce71c2f"
+            label: Text
+            name: '-1ce71c2f'
+            widget: string
+          - hint: 'Original text: dd to VIPs or Contacts, key: -38b25b95'
+            label: Text
+            name: '-38b25b95'
+            widget: string
+          - hint: 'Original text: Are you ready to create , key: 5b564ce9'
+            label: Text
+            name: 5b564ce9
+            widget: string
+          - hint: 'Original text: a badass brand? , key: 52622b63'
+            label: Text
+            name: 52622b63
+            widget: string
+          - hint: 'Original text: Book a discovery call, key: -7cd1cf5c'
+            label: Text
+            name: '-7cd1cf5c'
+            widget: string
+          - hint: 'Original text: Or, key: a03'
+            label: Text
+            name: a03
+            widget: string
+          - hint: 'Original text: Learn through video, key: 2e62ce64'
+            label: Text
+            name: 2e62ce64
+            widget: string
+          - hint: 'Original text: Ready to, key: -2fcb75c8'
+            label: Text
+            name: '-2fcb75c8'
+            widget: string
+          - hint: 'Original text: create , key: 3d4e7ea4'
+            label: Text
+            name: 3d4e7ea4
+            widget: string
+          - hint: 'Original text: a badass , key: 156b7285'
+            label: Text
+            name: 156b7285
+            widget: string
+          - hint: 'Original text: brand?, key: -5250da68'
+            label: Text
+            name: '-5250da68'
+            widget: string
+          - hint: 'Original text: Facing elusive high-ticket clients?, key: -316edd2d'
+            label: Text
+            name: '-316edd2d'
+            widget: string
+          - hint: >-
+              Original text: High sales and marketing spend and little revenue
+              growth?, key: -1b4a9f96
+            label: Text
+            name: '-1b4a9f96'
+            widget: string
+          - hint: >-
+              Original text: Do the brands around you feel impressive and yet
+              yours feels lacking?, key: -527921a1
+            label: Text
+            name: '-527921a1'
+            widget: string
+          - hint: >-
+              Original text: Experience explosive branding strategy direction in
+              60-minutes for actionable insights and growth., key: -658076a1
+            label: Text
+            name: '-658076a1'
+            widget: text
+          - hint: 'Original text: Get actionable , key: 7068aba6'
+            label: Text
+            name: 7068aba6
+            widget: string
+          - hint: 'Original text: Branding strategy consulting, key: -57e97d42'
+            label: Text
+            name: '-57e97d42'
+            widget: string
+          - hint: >-
+              Original text: Actionable strategy to dominate the market, key:
+              4e29a578
+            label: Text
+            name: 4e29a578
+            widget: string
+          - hint: 'Original text: Book a free 15-minute , key: -9259aff'
+            label: Text
+            name: '-9259aff'
+            widget: string
+          - hint: 'Original text: Elusive , key: 1eff296d'
+            label: Text
+            name: 1eff296d
+            widget: string
+          - hint: 'Original text: on marketing and no sales, key: -613dfecf'
+            label: Text
+            name: '-613dfecf'
+            widget: string
+          - hint: 'Original text: You are Closer , key: 69e96959'
+            label: Text
+            name: '69e96959'
+            widget: string
+          - hint: 'Original text: to 2040, key: -4868d441'
+            label: Text
+            name: '-4868d441'
+            widget: string
+          - hint: 'Original text: than 2006, key: 2b4873e3'
+            label: Text
+            name: 2b4873e3
+            widget: string
+          - hint: >-
+              Original text: So why not take control and shape a brand that
+              causes your audience to flock to you? , key: -554dd0d0
+            label: Text
+            name: '-554dd0d0'
+            widget: string
+          - hint: >-
+              Original text: Get access to be as unforgettable as your
+              pop-culture favorites with this brand strategy guide, AND, get
+              insider brand strategy tips + exclusive access to the good stuff!,
+              key: -20c790dc
+            label: Text
+            name: '-20c790dc'
+            widget: text
+          - hint: >-
+              Original text: Your inbox is safe from spam - pinky promise!, key:
+              -21af4505
+            label: Text
+            name: '-21af4505'
+            widget: string
+          - hint: >-
+              Original text: (Includes insights about The 7 Deadly Sins that
+              Ruin your Brand Voice and 5+ more adaptable lessons with detailed,
+              actionable tips.), key: -3a2a39ac
+            label: Text
+            name: '-3a2a39ac'
+            widget: text
+          - hint: 'Original text: Name, key: 24eeab'
+            label: Text
+            name: 24eeab
+            widget: string
+          - hint: 'Original text: Email, key: 3ff5b7c'
+            label: Text
+            name: 3ff5b7c
+            widget: string
+          - hint: 'Original text: I accept the , key: 1b92f490'
+            label: Text
+            name: 1b92f490
+            widget: string
+          - hint: 'Original text: Terms, key: 4cf5967'
+            label: Text
+            name: 4cf5967
+            widget: string
+          - hint: >-
+              Original text: When prospects know what to expect from a brand,
+              hesitation melts away and they approach you first. We build
+              clarity in your unique value proposition to resonate with your
+              target audience and build trust in your brand strategy., key:
+              2db72a6e
+            label: Text
+            name: 2db72a6e
+            widget: text
+          - hint: >-
+              Original text: We focus on delivering consistency that turns
+              clients into your hype team. They’ll refer your business to
+              others, amplifying your reach!, key: -48f6b5c2
+            label: Text
+            name: '-48f6b5c2'
+            widget: text
+          - hint: >-
+              Original text: We navigate the realm of brand identity, crafting a
+              clear roadmap that’ll help guide your marketing and messaging
+              activities, resonate deeply with your target audience, and
+              effectively communicates your brand’s essence., key: 3f94bf04
+            label: Text
+            name: 3f94bf04
+            widget: text
+          - hint: >-
+              Original text: "Working with Beatrice has been a real pleasure.
+              She has taken the time from the very start to understand me as a
+              person in order to understand the business I was building and help
+              on the branding. She came up with plenty of interesting
+              suggestions even before we worked together, helped set the
+              framework, and provided me with great momentum at a critical
+              building stage.I look forward to working together in the future
+              and use B's energy for my brand!", key: 61a1a847
+            label: Text
+            name: 61a1a847
+            widget: text
+          - hint: 'Original text: 1. Step, key: 707aaf0f'
+            label: Text
+            name: 707aaf0f
+            widget: string
+          - hint: 'Original text: 2. Step, key: -5a9f15b0'
+            label: Text
+            name: '-5a9f15b0'
+            widget: string
+          - hint: >-
+              Original text: Dive into your brand: solidify core values,
+              foundations, strengths, and weaknesses. These will lead every step
+              – from hiring to sales, embodying your brand’s beliefs, actions,
+              and commitments., key: -2892e32f
+            label: Text
+            name: '-2892e32f'
+            widget: text
+          - hint: 'Original text: sses positioning & differentiation, key: -33153e2e'
+            label: Text
+            name: '-33153e2e'
+            widget: string
+          - hint: 'Original text: WHere the , key: -f1b8a98'
+            label: Text
+            name: '-f1b8a98'
+            widget: string
+          - hint: 'Original text: branding, key: -1833505'
+            label: Text
+            name: '-1833505'
+            widget: string
+          - hint: 'Original text: badassery IS at!, key: -957e718'
+            label: Text
+            name: '-957e718'
+            widget: string
+          - hint: >-
+              Original text: Receive your pop culture guide to branding strategy
+              AND insider branding strategy tips + exclusive early access to the
+              good shit! Your inbox is safe from spam - pinky promise!, key:
+              -28c89946
+            label: Text
+            name: '-28c89946'
+            widget: text
+          - hint: 'Original text: Email Address, key: -2b7010d0'
+            label: Text
+            name: '-2b7010d0'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /aboout-beatrice/, key: -76284abe'
+            label: Link
+            name: '-76284abe'
+            widget: string
+          - hint: 'Original link: /the-badass-mob-newsletter/, key: 34faac23'
+            label: Link
+            name: 34faac23
+            widget: string
+          - hint: 'Original link: /the-art-of-branding-podcast/, key: -43aa1384'
+            label: Link
+            name: '-43aa1384'
+            widget: string
+          - hint: 'Original link: /branding-blog-badassery/, key: cc2f607'
+            label: Link
+            name: cc2f607
+            widget: string
+          - hint: 'Original link: /archive-portfolio/, key: -37d68bbf'
+            label: Link
+            name: '-37d68bbf'
+            widget: string
+          - hint: 'Original link: #pricing, key: 2101c243'
+            label: Link
+            name: 2101c243
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: >-
+              Original link: https://www.youtube.com/watch?v=4rfF8Kj_ls8, key:
+              -707adbab
+            label: Link
+            name: '-707adbab'
+            widget: string
+          - hint: >-
+              Original link: https://www.youtube.com/watch?v=zGeYyiB8ojw, key:
+              -17503a1
+            label: Link
+            name: '-17503a1'
+            widget: string
+          - hint: >-
+              Original link: https://www.youtube.com/watch?v=QPRuP67bIlo, key:
+              479ce263
+            label: Link
+            name: 479ce263
+            widget: string
+          - hint: >-
+              Original link:
+              https://calendly.com/beatricegutknecht/explosivebrandinghour, key:
+              380cd586
+            label: Link
+            name: 380cd586
+            widget: string
+          - hint: >-
+              Original link:
+              https://calendly.com/beatricegutknecht/brand_discovery_call?month=2023-05,
+              key: -171220a6
+            label: Link
+            name: '-171220a6'
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/beatricegutknecht/,
+              key: 4f4f8ffd
+            label: Link
+            name: 4f4f8ffd
+            widget: string
+          - hint: 'Original link: https://www.tiktok.com/@badasserybyb, key: 1f65d45f'
+            label: Link
+            name: 1f65d45f
+            widget: string
+          - hint: >-
+              Original link: https://www.youtube.com/@badasserybyb, key:
+              6cdb917c
+            label: Link
+            name: 6cdb917c
+            widget: string
+          - hint: >-
+              Original link: https://www.instagram.com/officiallybetty_g/, key:
+              207dfa39
+            label: Link
+            name: 207dfa39
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.privacypolicygenerator.info/live.php?token=HszQbGvDHVCSjPxfXh2h4MUgz17Mk4pt,
+              key: 1eb2016d
+            label: Link
+            name: 1eb2016d
+            widget: string
+          - hint: 'Original link: https://www.pee-tee.com/, key: -56c84fb5'
+            label: Link
+            name: '-56c84fb5'
+            widget: string
+          - hint: >-
+              Original link: https://www.finsweet.com/client-first/docs/intro,
+              key: 49f972a8
+            label: Link
+            name: 49f972a8
+            widget: string
+          - hint: 'Original link: https://relume.io, key: -48962a2f'
+            label: Link
+            name: '-48962a2f'
+            widget: string
+          - hint: >-
+              Original link: http://library.relume.io/color-palettes, key:
+              5ba83a96
+            label: Link
+            name: 5ba83a96
+            widget: string
+          - hint: 'Original link: /pricing/, key: -d9445a8'
+            label: Link
+            name: '-d9445a8'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.linkedin.com/in/javeriazafarcopywriter/, key: 723369
+            label: Link
+            name: '723369'
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/jespernotjasper/, key:
+              3bed6fd2
+            label: Link
+            name: 3bed6fd2
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/taylortudisco/, key:
+              7981db4b
+            label: Link
+            name: 7981db4b
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/gemma-haigh-311225113/,
+              key: -1c660d4a
+            label: Link
+            name: '-1c660d4a'
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/elensentier/, key:
+              -df01cd
+            label: Link
+            name: '-df01cd'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.linkedin.com/in/giorgia-%C4%91ur%C4%91ija-savi%C4%87-77516130/,
+              key: 334fb3ba
+            label: Link
+            name: 334fb3ba
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/michaelcliftvcc/, key:
+              -3f6679ce
+            label: Link
+            name: '-3f6679ce'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.linkedin.com/in/brooke-braga-92a4bb179/, key: 30d425db
+            label: Link
+            name: 30d425db
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/mer1matevosyan/, key:
+              5f64dd95
+            label: Link
+            name: 5f64dd95
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/blackbeak/, key:
+              7bd088f5
+            label: Link
+            name: 7bd088f5
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/paula-naeff-coach111/,
+              key: 33ff51b7
+            label: Link
+            name: 33ff51b7
+            widget: string
+          - hint: >-
+              Original link:
+              https://open.spotify.com/show/6HOVUX3g2JjLTeL2sMwEQi, key:
+              504f637c
+            label: Link
+            name: 504f637c
+            widget: string
+          - hint: >-
+              Original link:
+              https://podcasters.amazon.com/podcasts/6ace004a-d7d2-4311-aa3f-da6feb4652da,
+              key: 56ba33b0
+            label: Link
+            name: 56ba33b0
+            widget: string
+          - hint: >-
+              Original link: https://castbox.fm/channel/id5456695, key:
+              -7e3631ac
+            label: Link
+            name: '-7e3631ac'
+            widget: string
+          - hint: >-
+              Original link:
+              https://podcastsconnect.apple.com/my-podcasts/show/the-art-of-branding/f8235263-61a1-45a8-897f-c342fcb64397,
+              key: -1cfeefa7
+            label: Link
+            name: '-1cfeefa7'
+            widget: string
+          - hint: >-
+              Original link:
+              https://drive.google.com/file/d/1EEU5cG35HNVRHN0oT1b3BNpBAx06VGgC/view?usp=sharing&usp=embed_facebook,
+              key: -e5691a3
+            label: Link
+            name: '-e5691a3'
+            widget: string
+          - hint: >-
+              Original link:
+              https://calendly.com/beatricegutknecht/brand_discovery_call?month=2023-06,
+              key: -171220a5
+            label: Link
+            name: '-171220a5'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: '690062e5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-43d6ee7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 21d71d5b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-292628f9'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-54b3b91e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-50ee7db1'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4d84cc73'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7e5f78de'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3fdf5024'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 9e7479d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 531698df
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5161c040
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 54cb717e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-560d078e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-586b0c09'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-320b82f1'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-52a35650'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 48d98525
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5755c64b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4abef31c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4b0282d2'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 722c2283
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 9e73b62
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-135f85cd'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6190b479
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-346130ee'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3f0cfef4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6376eff4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-760f6b29'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 74ce02f9
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: f26c5ed
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-ed1810'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 70abc4ff
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7095ed36'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-72c13b64'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4f7e29b8'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-195af40b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-119f8c58'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6ea8c806
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6ec73268
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2177d25c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5e2f831d'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 10ddfb30
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-b477747'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-231dbb77'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7b99e45c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7ced59fa
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 38dfc993
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1b7ec3d0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5b2fc629
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
